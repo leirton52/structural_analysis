@@ -1,6 +1,11 @@
 let screen = document.getElementById('screen') //pegando o canvas do html
 let ctx = screen.getContext("2d") //pegando o contexto do canvas
 
+//seleção que guarda os nos criados
+let node1ForLine = document.getElementById('node1ForLine')
+let node2ForLine = document.getElementById('node2ForLine')
+
+
 //criando os vetores onde serão armasenadas as linhas os nos e as cargas
 let lines = []
 let nodes = []
@@ -53,9 +58,23 @@ function insertNode() {
 
         nodes.push(node)
         drawNode(node)
+   
+        let item1 = document.createElement('option')
+        item1.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item1.value = nodes.length - 1 
+        node1ForLine.appendChild(item1)
+        
+        let item2 = document.createElement('option')
+        item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item2.value = nodes.length - 1 
+        node2ForLine.appendChild(item2)
    }else{
         window.alert("falta algum valor")        
    }
+}
+
+function insertLine(){
+    
 }
 
 
