@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Analise estrutural</title>
+        <style>
+            #screen{
+                border: 1px solid;
+                image-rendering: pixellated;
+                image-rendering: crisp-edges;
+                image-rendering: -moz-crisp-edges;
+            }
+
+            #tudo{
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div id=tudo>
+            <div>
+                <canvas id="screen" width=400 height=400></canvas>
+            </div>
+            <div>
+                <section>
+                    <p>Ponto:</p>
+                    <p> x: <input name="posX" id="posX" type="number"></p>
+                    </p> y: <input name="posY" id="posY" type="number"></p>
+                    <p>Força: <input name="force" value="0" id="force" type="number"></p>
+                    <p><input type="button" value="inserir"  onclick="insertNode()">
+                </section>
+                <section>
+                     <p>Linha</p>
+                     <p>Ponto inicial: </p>
+                     <p>Ponto final: </p>
+                     <p>carga: </p>
+                     <p><input type="button" value="inserir" onclick="insertLine()"></p> 
+                </section>
+            </div>
+        </div>
+    </body>
+    <script src="./script.js"></script>
+</html>
