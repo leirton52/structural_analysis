@@ -11,13 +11,21 @@ let lines = []
 let nodes = []
 let cargas = []
 
-//consfigurando a os parametros de renderização
-ctx.lineWidth = 3
-ctx.strokeStyle = "blue"
-ctx.fillStyle = 'red'
 
 //função que desenha a linha
 function drawLine(line) {
+    //consfigurando a os parametros de renderização
+    ctx.lineWidth = 3
+    ctx.strokeStyle = "green"
+    ctx.fillStyle = 'rgba(0,0,200, 0.5)'
+    
+    ctx.beginPath()
+    ctx.moveTo(line.node1.x, line.node1.y)
+    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicio)
+    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFim)
+    ctx.lineTo(line.node2.x, line.node2.y)
+    ctx.fill()
+    
     ctx.beginPath()
     ctx.moveTo(line.node1.x, line.node1.y)
     ctx.lineTo(line.node2.x, line.node2.y)
@@ -26,6 +34,8 @@ function drawLine(line) {
 
 //função que desenha o nó
 function drawNode(node){
+    ctx.fillStyle = 'red'
+    
     ctx.beginPath()
     ctx.arc(node.x, node.y, 5, 0, Math.PI*2, true)
     ctx.fill()
@@ -74,7 +84,24 @@ function insertNode() {
 }
 
 function insertLine(){
-    
+   let node1 = document.getElementById("node1ForLine")
+   let node2 = document.getElementById("node2ForLine")
+
+   if(node1.value == "Selecione" || node2.value == "Selecione"){
+        window.alert('Selecione o ponto inicial e final')
+   }else{
+       let cargaInicio = document.getElementById('cargaInicio')
+       let cargaFim = document.getElementById('cargaFim')
+       carga = {
+            cargaInicio: Number(cargaInicio.value),
+            cargaFim: Number(cargaFim.value)
+       }
+       
+       let line = new Line(nodes[node1.value], nodes[node2.value], carga)
+
+       lines.push(line)
+       drawLine(line)
+   }
 }
 
 
@@ -86,8 +113,8 @@ const reaction = {
 const no1 = new Node(100, 200, 50, reaction)
 const no2 = new Node(300, 200, 0, reaction)
 const carga1 = {
-    cargaInicio: 10,
-    cargaFim: 10
+    cargaInicio: 60,
+    cargaFim: 60
 }
 const line1 = new Line(no1, no2, carga1)
 
