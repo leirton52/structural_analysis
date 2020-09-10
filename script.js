@@ -4,7 +4,7 @@ let ctx = screen.getContext("2d") //pegando o contexto do canvas
 //seleção que guarda os nós criados
 let node1ForLine = document.getElementById('node1ForLine')
 let node2ForLine = document.getElementById('node2ForLine')
-
+let nodeForEdtion = document.getElementById('nodeForEdtion')
 
 //criando os vetores onde serão armasenadas as linhas, os nos e as cargas
 let lines = []
@@ -157,6 +157,11 @@ function insertNode() {
         item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
         item2.value = nodes.length - 1 
         node2ForLine.appendChild(item2)
+        
+        let item3 = document.createElement('option')
+        item3.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item3.value = nodes.length - 1 
+        nodeForEdtion.appendChild(item3)
    }else{
         window.alert("falta algum valor")        
    }
@@ -183,6 +188,29 @@ function insertLine(){
    }
 }
 
+//coloca valores nos elementos da edição de um ponto
+let edtionPosX = document.getElementById("edtionPosX")
+let edtionPosY = document.getElementById("edtionPosY")
+let edtionForce = document.getElementById("edtionForce")
+let edtionVinc = document.getElementById("edtionVinc")
+nodeForEdtion.addEventListener('change', (event) => {
+    edtionPosX.value = nodes[nodeForEdtion.value].x
+    edtionPosY.value = nodes[nodeForEdtion.value].y
+    edtionForce.value = nodes[nodeForEdtion.value].force
+    edtionVinc.value = nodes[nodeForEdtion.value].vinc
+})
+
+//função que edita um nó
+function editNode(){
+    ctx.clearRect(0, 0, screen.width, screen.height)
+    nodes.forEach( node => {
+        console.log(node)
+        drawNode(node)
+    })
+
+    //Lembrae de validar dados
+    //nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
+}
 
 const reaction = {
     rx: 30,

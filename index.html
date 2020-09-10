@@ -12,6 +12,10 @@
             #tudo{
                 display: flex;
             }
+
+            section{
+                border: 1px solid;
+            }
         </style>
     </head>
     <body>
@@ -45,6 +49,26 @@
                      <p>Carga Inicial:<input type="Number" id="cargaInicio" value="0"></p>
                      <p>Carga Final: <input type="Number" id="cargaFim" value="0"></p>
                      <p><input type="button" value="inserir" onclick="insertLine()"></p> 
+                </section>
+                <section>
+                    <p>Editar ponto</p>
+                    <p><select id="nodeForEdtion">
+                        <option>Selecione um ponto</option>
+                    </select></p>
+                    <p>x: <input type="Number" id="edtionPosX"></p>
+                    <p>y: <input type="Number" id="edtionPosY"></p>
+                    <p>force: <input type="Number" id="edtionForce"></p>
+                    <p>Vinculação: <select id="edtionVinc">
+                        <option value="Nenhuma">Nenhuma</option>
+                        <option value="apoiado">apoiado</option>
+                        <option value="biapoiado">biapoiado</option>
+                        <option value="engastado">engastado</option>
+                        <option value="rotulado">rotulado</option>
+                    </select></p>
+                    <div display="flex">
+                        <input type="button" value="modificar" onclick="editNode()">
+                        <input type="button" value="remover" onclick="removeNode()">
+                    </div>
                 </section>
             </div>
         </div>
