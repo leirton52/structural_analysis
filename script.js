@@ -150,17 +150,20 @@ function insertNode() {
    
         let item1 = document.createElement('option')
         item1.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
-        item1.value = nodes.length - 1 
+        item1.value = nodes.length - 1
+        item1.classList.add(`no${nodes.length}`)
         node1ForLine.appendChild(item1)
         
         let item2 = document.createElement('option')
         item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
-        item2.value = nodes.length - 1 
+        item2.value = nodes.length - 1
+        item2.classList.add(`no${nodes.length}`)
         node2ForLine.appendChild(item2)
         
         let item3 = document.createElement('option')
         item3.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
-        item3.value = nodes.length - 1 
+        item3.value = nodes.length - 1
+        item3.classList.add(`no${nodes.length}`)
         nodeForEdtion.appendChild(item3)
    }else{
         window.alert("falta algum valor")        
@@ -194,22 +197,47 @@ let edtionPosY = document.getElementById("edtionPosY")
 let edtionForce = document.getElementById("edtionForce")
 let edtionVinc = document.getElementById("edtionVinc")
 nodeForEdtion.addEventListener('change', (event) => {
-    edtionPosX.value = nodes[nodeForEdtion.value].x
-    edtionPosY.value = nodes[nodeForEdtion.value].y
-    edtionForce.value = nodes[nodeForEdtion.value].force
-    edtionVinc.value = nodes[nodeForEdtion.value].vinc
+    if(nodeForEdtion.value == "Selecione um ponto"){
+        edtionPosX.value = null
+        edtionPosY.value = null
+        edtionForce.value = null
+        edtionVinc.value = "Nenhuma"
+    }else{
+        edtionPosX.value = nodes[nodeForEdtion.value].x
+        edtionPosY.value = nodes[nodeForEdtion.value].y
+        edtionForce.value = nodes[nodeForEdtion.value].force
+        edtionVinc.value = nodes[nodeForEdtion.value].vinc
+    }
 })
 
 //função que edita um nó
 function editNode(){
+    //modifica as propriedades do nó
+    nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
+    nodes[nodeForEdtion.value].y = Number(edtionPosY.value)
+    nodes[nodeForEdtion.value].force = Number(edtionForce.value)
+    nodes[nodeForEdtion.value].vinc = Number(edtionVinc.value)
+    
+    //Modifica no que está sendo editado na TAG select
+    let selectNodes = document.getElementsByClassName(`no${nodes.length}`)
+    
+    for(let i = 0 ; i < selectNodes.length; i++){
+        let item = selectNodes[i]
+
+        item.text = `no ${nodes.length}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}, force: ${nodes[nodeForEdtion.value].force}`
+    }
+    //acaba a modificação do select
+
+    //desenha as modificações no canvas
     ctx.clearRect(0, 0, screen.width, screen.height)
+    
     nodes.forEach( node => {
-        console.log(node)
         drawNode(node)
     })
-
-    //Lembrae de validar dados
-    //nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
+    
+    lines.forEach(line => {
+       drawLine(line) 
+    })
 }
 
 const reaction = {
