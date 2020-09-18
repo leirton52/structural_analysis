@@ -219,8 +219,8 @@ function editNode(){
     nodes[nodeForEdtion.value].vinc = Number(edtionVinc.value)
     
     //Modifica no que está sendo editado na TAG select
-    let selectNodes = document.getElementsByClassName(`no${nodes.length}`)
-    
+    let selectNodes = document.getElementsByClassName(`no${Number(nodeForEdtion.value) + 1}`)
+   
     for(let i = 0 ; i < selectNodes.length; i++){
         let item = selectNodes[i]
 
@@ -238,6 +238,32 @@ function editNode(){
     lines.forEach(line => {
        drawLine(line) 
     })
+}
+
+function removeNode() {
+    indexRemove = Number(nodeForEdtion.value) + 1
+    if(nodeForEdtion.value == "Selecione um ponto"){
+        window.alert("Selecione um ponto")
+    }else{
+        let selectNodes = document.getElementsByClassName(`no${indexRemove}`)
+        for(let i = 0 ; i < selectNodes.length; i++){
+            let item = selectNodes[i]
+            item.parentNode.removeChild(item)
+        }
+//continuar daqui modificar valores da seleção dos nós restantes
+        for(i=indexRemove + 1; i<=nodes.length; i++){
+            let node = document.getElementsByClassName(`no${i}`)
+
+            for(let j = 0 ; j < node.length; j++){
+                let item = selectNodes[j]
+
+                item.value = i
+            }
+
+        }
+
+        nodes.splice(nodeForEdtion.value,1)
+    }
 }
 
 const reaction = {
