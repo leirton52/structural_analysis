@@ -224,7 +224,7 @@ function editNode(){
     for(let i = 0 ; i < selectNodes.length; i++){
         let item = selectNodes[i]
 
-        item.text = `no ${nodes.length}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}, force: ${nodes[nodeForEdtion.value].force}`
+        item.text = `no ${Number(nodeForEdtion.value) + 1}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}, force: ${nodes[nodeForEdtion.value].force}`
     }
     //acaba a modificação do select
 
