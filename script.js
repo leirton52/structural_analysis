@@ -246,16 +246,17 @@ function removeNode() {
         window.alert("Selecione um ponto")
     }else{
         let selectNodes = document.getElementsByClassName(`no${indexRemove}`)
-        for(let i = 0 ; i < selectNodes.length; i++){
-            let item = selectNodes[i]
+
+         while (selectNodes.length > 0){
+            let item = selectNodes[0]
             item.parentNode.removeChild(item)
         }
 //continuar daqui modificar valores da seleção dos nós restantes
         for(i=indexRemove + 1; i<=nodes.length; i++){
             let node = document.getElementsByClassName(`no${i}`)
-
+            
             for(let j = 0 ; j < node.length; j++){
-                let item = selectNodes[j]
+                let item = node[j]
 
                 item.value = i
             }
