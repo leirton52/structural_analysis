@@ -1,30 +1,21 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Analise estrutural</title>
-        <style>
-            #screen{
-                border: 1px solid;
-                image-rendering: pixellated;
-                image-rendering: crisp-edges;
-                image-rendering: -moz-crisp-edges;
-            }
-
-            #tudo{
-                display: flex;
-            }
-
-            section{
-                border: 1px solid;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div id="menu">
+            <input type="button" value="inserir ponto" onclick="menuAddPonto()">
+            <input type="button" value="inserir linha" onclick="menuAddLinha()">
+            <input type="button" value="editar ponto" onclick="menuEditPonto()">
+        </div>
         <div id=tudo>
             <div>
                 <canvas id="screen" width=400 height=400></canvas>
             </div>
             <div>
-                <section>
+                <section id="secAddPonto" class="hide">
                     <p>Ponto:</p>
                     <p> x: <input name="posX" id="posX" type="number"></p>
                     </p> y: <input name="posY" id="posY" type="number"></p>
@@ -38,7 +29,7 @@
                     </select></p>
                     <p><input type="button" value="inserir"  onclick="insertNode()">
                 </section>
-                <section>
+                <section id="secAddLinha" class="hide">
                      <p>Linha</p>
                      <p>Ponto inicial: <select name="node1ForLine" id="node1ForLine">
                         <option>Selecione</option>
@@ -50,7 +41,7 @@
                      <p>Carga Final: <input type="Number" id="cargaFim" value="0"></p>
                      <p><input type="button" value="inserir" onclick="insertLine()"></p> 
                 </section>
-                <section>
+                <section id="secEditPonto" class="hide">
                     <p>Editar ponto</p>
                     <p><select id="nodeForEdtion">
                         <option>Selecione um ponto</option>

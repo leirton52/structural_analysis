@@ -280,6 +280,26 @@ function removeNode() {
     }
 }
 
+let secAddPonto = document.getElementById("secAddPonto")
+let secAddLinha = document.getElementById("secAddLinha")
+let secEditPonto = document.getElementById("secEditPonto")
+function menuAddPonto(){
+    secAddPonto.className = "show"
+    secAddLinha.className = "hide"
+    secEditPonto.className = "hide"
+}
+function menuAddLinha(){
+    secAddPonto.className = "hide"
+    secAddLinha.className = "show"
+    secEditPonto.className = "hide"
+}
+function menuEditPonto(){
+    secAddPonto.className = "hide"
+    secAddLinha.className = "hide"
+    secEditPonto.className = "show"
+}
+
+
 const reaction = {
     rx: 30,
     ry: 40,
