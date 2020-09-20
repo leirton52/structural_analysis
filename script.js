@@ -254,16 +254,29 @@ function removeNode() {
 //continuar daqui modificar valores da seleção dos nós restantes
         for(i=indexRemove + 1; i<=nodes.length; i++){
             let node = document.getElementsByClassName(`no${i}`)
-            
-            for(let j = 0 ; j < node.length; j++){
-                let item = node[j]
 
-                item.value = i
+            while (node.length >0){
+                let item = node[0]
+               
+                //o menos 2 é porque vetores começam a contar do zero
+                let posAtualArr = i - 2
+
+                item.value = posAtualArr
+                item.text = `no ${posAtualArr + 1}, x: ${nodes[posAtualArr + 1].x}, y: ${nodes[posAtualArr + 1].y}, force: ${nodes[posAtualArr + 1].force}`
+                item.setAttribute('class' ,`no${posAtualArr + 1}`)         
             }
 
         }
 
         nodes.splice(nodeForEdtion.value,1)
+
+        ctx.clearRect(0, 0, screen.width, screen.height)   
+        nodes.forEach( node => {
+            drawNode(node)
+        })
+        lines.forEach(line => {
+            drawLine(line) 
+        })
     }
 }
 
