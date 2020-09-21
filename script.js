@@ -212,6 +212,11 @@ nodeForEdtion.addEventListener('change', (event) => {
 
 //função que edita um nó
 function editNode(){
+    if (nodeForEdtion.value == "Selecione um ponto"){
+        window.alert("Selecione um ponto")
+        return
+    }
+
     //modifica as propriedades do nó
     nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
     nodes[nodeForEdtion.value].y = Number(edtionPosY.value)
