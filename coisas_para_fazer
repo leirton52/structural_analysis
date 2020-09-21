@@ -1,0 +1,17 @@
+-fazer com que quando um ponto seja removido os campos de edição do ponto fiquem vazios
+
+-fazer a autenticação para não deixar remover um ponto que já está sendo utilizado por uma linha.
+
+-adicionar forças e cargas horizontais
+
+-criar a função que modifica uma linha
+
+-criar uma função que remove linha
+
+-criar as caracteristicas do material e de forma para as linhas
+
+-Fazer uma funcionalidade para que os pontos saibam quais linhas os estão utilizando.
+
+-organizar a interface da aplicação(ajeitar o style.css)
+
+-começar a criar uma biblioteca para trabalhar com matrizes e sistemas lineares
