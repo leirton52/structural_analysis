@@ -1,0 +1,21 @@
+#screen{
+    border: 1px solid;
+    image-rendering: pixellated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+}
+
+#tudo{
+    display: flex;
+}
+
+section{
+    border: 1px solid;
+}
+
+.hide{
+    display: none;
+}
+.show{
+    display:block;
+}
