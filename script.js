@@ -125,6 +125,7 @@ function Node(x=0, y=0, force=0,vinc,reaction={rx:0, ry:0, m:0}) {
     this.force= force
     this.vinc = vinc
     this.reaction = reaction
+    this.lines = [] //guarda a posição das linhas que estão usando o nó
 }
 
 //classe das linhas
@@ -187,6 +188,10 @@ function insertLine(){
        let line = new Line(nodes[node1.value], nodes[node2.value], carga)
 
        lines.push(line)
+
+       nodes[node1.value].lines.push(lines.length-1)
+       nodes[node2.value].lines.push(lines.length-1)
+       
        drawLine(line)
    }
 }
