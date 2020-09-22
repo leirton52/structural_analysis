@@ -1,7 +1,3 @@
--fazer com que quando um ponto seja removido os campos de edição do ponto fiquem vazios
-
--fazer a autenticação para não deixar remover um ponto que já está sendo utilizado por uma linha.
-
 -adicionar forças e cargas horizontais
 
 -criar a função que modifica uma linha
@@ -15,3 +11,7 @@
 -organizar a interface da aplicação(ajeitar o style.css)
 
 -começar a criar uma biblioteca para trabalhar com matrizes e sistemas lineares
+
+-Autenticar para impedir que um linha seja inserida com o ponto inicial sendo igual ao ponto final
+
+-Autenticar para que duas linhas ou dois pontos não sejam iseridos no mesmo lugar.

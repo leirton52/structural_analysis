@@ -226,7 +226,7 @@ function editNode(){
     nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
     nodes[nodeForEdtion.value].y = Number(edtionPosY.value)
     nodes[nodeForEdtion.value].force = Number(edtionForce.value)
-    nodes[nodeForEdtion.value].vinc = Number(edtionVinc.value)
+    nodes[nodeForEdtion.value].vinc = edtionVinc.value
     
     //Modifica no que está sendo editado na TAG select
     let selectNodes = document.getElementsByClassName(`no${Number(nodeForEdtion.value) + 1}`)
@@ -255,6 +255,12 @@ function removeNode() {
     if(nodeForEdtion.value == "Selecione um ponto"){
         window.alert("Selecione um ponto")
     }else{
+        //autenticação para ver se o nó está sendo usado por uma linha
+        if(nodes[nodeForEdtion.value].lines.length != 0){
+            window.alert("Esse ponto não pode ser apagado. Ele está sendo usado por uma linha.")
+            return
+        }
+
         let selectNodes = document.getElementsByClassName(`no${indexRemove}`)
 
          while (selectNodes.length > 0){
@@ -287,6 +293,12 @@ function removeNode() {
         lines.forEach(line => {
             drawLine(line) 
         })
+
+        nodeForEdtion.value = "Selecione um ponto"
+        edtionPosX.value = null
+        edtionPosY.value = null
+        edtionForce.value = null
+        edtionVinc.value = "Nenhuma"
     }
 }
 
