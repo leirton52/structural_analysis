@@ -48,12 +48,33 @@ function drawNode(node){
     ctx.fill()
 
     //desenhado a força
-    if(node.force != 0){
+    if(node.forceX != 0){
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'black'
+        ctx.lineWidth = 1
+      
+        ctx.beginPath()
+        ctx.moveTo(node.x-node.forceX, node.y)
+        ctx.lineTo(node.x, node.y)
+        ctx.stroke()
+        
+
+        ctx.beginPath()
+        ctx.moveTo(node.x, node.y)
+        ctx.lineTo(node.x-10, node.y-5)
+        ctx.lineTo(node.x-10, node.y+5)
+        ctx.fill()
+        
+        ctx.font = "15px arial"
+        ctx.fillText(node.forceX, node.x - node.forceX, node.y)
+    }
+
+    if(node.forceY != 0){
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'black'
         ctx.lineWidth = 1
         ctx.beginPath()
-        ctx.moveTo(node.x, node.y-node.force)
+        ctx.moveTo(node.x, node.y - node.forceY)
         ctx.lineTo(node.x, node.y)
         ctx.lineTo(node.x-5,node.y-10)
         ctx.lineTo(node.x+5, node.y-10)
@@ -61,7 +82,8 @@ function drawNode(node){
         ctx.stroke()
         ctx.fill()
         ctx.font = "15px arial"
-        ctx.fillText(node.force, node.x, node.y-node.force+10)
+        ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
+
     }
 
     if(node.vinc == "apoiado"){
@@ -119,10 +141,11 @@ function drawNode(node){
 }
 
 //calsse dos nos
-function Node(x=0, y=0, force=0,vinc,reaction={rx:0, ry:0, m:0}) {
+function Node(x=0, y=0, forceX=0, forceY=0, vinc, reaction={rx:0, ry:0, m:0}) {
     this.x= x
     this.y= y
-    this.force= force
+    this.forceX= forceX
+    this.forceY = forceY
     this.vinc = vinc
     this.reaction = reaction
     this.lines = [] //guarda a posição das linhas que estão usando o nó
@@ -141,28 +164,29 @@ function insertNode() {
    let y = document.getElementById('posY')
 
    if(x.value && y.value){
-        let force = document.getElementById('force')
+        let forceX = document.getElementById('forceX')
+        let forceY = document.getElementById('forceY')
         let vinc = document.getElementById("vinc")
         
-        let node = new Node(Number(x.value), Number(y.value), Number(force.value), vinc.value)
+        let node = new Node(Number(x.value), Number(y.value), Number(forceX.value), Number(forceY.value),vinc.value)
 
         nodes.push(node)
         drawNode(node)
    
         let item1 = document.createElement('option')
-        item1.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item1.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
         item1.value = nodes.length - 1
         item1.classList.add(`no${nodes.length}`)
         node1ForLine.appendChild(item1)
         
         let item2 = document.createElement('option')
-        item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
         item2.value = nodes.length - 1
         item2.classList.add(`no${nodes.length}`)
         node2ForLine.appendChild(item2)
         
         let item3 = document.createElement('option')
-        item3.text = `no ${nodes.length}: x:${x.value}, y:${y.value}, força: ${force.value}`
+        item3.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
         item3.value = nodes.length - 1
         item3.classList.add(`no${nodes.length}`)
         nodeForEdtion.appendChild(item3)
@@ -199,18 +223,21 @@ function insertLine(){
 //coloca valores nos elementos da edição de um ponto
 let edtionPosX = document.getElementById("edtionPosX")
 let edtionPosY = document.getElementById("edtionPosY")
-let edtionForce = document.getElementById("edtionForce")
+let edtionForceX = document.getElementById("edtionForceX")
+let edtionForceY = document.getElementById("edtionForceY")
 let edtionVinc = document.getElementById("edtionVinc")
 nodeForEdtion.addEventListener('change', (event) => {
     if(nodeForEdtion.value == "Selecione um ponto"){
         edtionPosX.value = null
         edtionPosY.value = null
-        edtionForce.value = null
+        edtionForceX.value = null
+        edtionForceY.value = null
         edtionVinc.value = "Nenhuma"
     }else{
         edtionPosX.value = nodes[nodeForEdtion.value].x
         edtionPosY.value = nodes[nodeForEdtion.value].y
-        edtionForce.value = nodes[nodeForEdtion.value].force
+        edtionForceX.value = nodes[nodeForEdtion.value].forceX
+        edtionForceY.value = nodes[nodeForEdtion.value].forceY
         edtionVinc.value = nodes[nodeForEdtion.value].vinc
     }
 })
@@ -225,7 +252,8 @@ function editNode(){
     //modifica as propriedades do nó
     nodes[nodeForEdtion.value].x = Number(edtionPosX.value)
     nodes[nodeForEdtion.value].y = Number(edtionPosY.value)
-    nodes[nodeForEdtion.value].force = Number(edtionForce.value)
+    nodes[nodeForEdtion.value].forceX = Number(edtionForceX.value)
+    nodes[nodeForEdtion.value].forceY = Number(edtionForceY.value)
     nodes[nodeForEdtion.value].vinc = edtionVinc.value
     
     //Modifica no que está sendo editado na TAG select
@@ -234,7 +262,7 @@ function editNode(){
     for(let i = 0 ; i < selectNodes.length; i++){
         let item = selectNodes[i]
 
-        item.text = `no ${Number(nodeForEdtion.value) + 1}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}, force: ${nodes[nodeForEdtion.value].force}`
+        item.text = `no ${Number(nodeForEdtion.value) + 1}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}`
     }
     //acaba a modificação do select
 
@@ -278,7 +306,7 @@ function removeNode() {
                 let posAtualArr = i - 2
 
                 item.value = posAtualArr
-                item.text = `no ${posAtualArr + 1}, x: ${nodes[posAtualArr + 1].x}, y: ${nodes[posAtualArr + 1].y}, force: ${nodes[posAtualArr + 1].force}`
+                item.text = `no ${posAtualArr + 1}, x: ${nodes[posAtualArr + 1].x}, y: ${nodes[posAtualArr + 1].y}`
                 item.setAttribute('class' ,`no${posAtualArr + 1}`)         
             }
 
@@ -297,7 +325,8 @@ function removeNode() {
         nodeForEdtion.value = "Selecione um ponto"
         edtionPosX.value = null
         edtionPosY.value = null
-        edtionForce.value = null
+        edtionForceX.value = null
+        edtionForceY.value = null
         edtionVinc.value = "Nenhuma"
     }
 }
@@ -327,8 +356,8 @@ const reaction = {
     ry: 40,
     m: 5,
 }
-const no1 = new Node(100, 200, 50, 'engastado',reaction)
-const no2 = new Node(300, 200, 0, 'rotulado', reaction)
+const no1 = new Node(100, 200, 50, 30,'engastado',reaction)
+const no2 = new Node(300, 200, 0, 20, 'rotulado', reaction)
 const carga1 = {
     cargaInicio: 60,
     cargaFim: 60
