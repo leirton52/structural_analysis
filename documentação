@@ -1,0 +1,72 @@
+- html será divido:
+
+    - Em uma <div> contento o menu;
+        - botões que levam para secções que para insetir pontos e linhas,
+        - botões para editar e remover pontos e linhas;
+    - Uma <div> contendo o conteúdo;
+        - canvas
+        - secções dos botões do menu que por padrão ficarão ocultas pelo css
+
+- Script
+    - screen: variável que referencia o canvas da página
+    - ctx: variável que representa o contexto do canvas
+    - node1ForLine, node2ForLine: select que guarda posição do ponto inicial e do ponto final de uma linha respectivamente no array dos pontos
+    - NodeForEdition: select que guarda a posição do ponto que será modificado ou removido no array dos pontos;
+
+    - edtionPosx, edtionPosY, edtionForceX, edtionForceY, edtionVinc: guardam os valores que modificarão algum nó pegos no html;
+    
+    - lines: array que guarda as linhas inseridas
+    - nodes: array que guarda os pontos inseridos
+    - cargas: array que guarda as cargas inseridas
+
+    - Node(): classe que representa um ponto.
+        - Tem como variáveis:
+            - x: posição em x;
+            - y: posição em y;
+            - forceX: força em x;
+            - forceY: força em y;
+            - reaction: Tipo de reação;
+            - lines: array que guarda a posição das linhas(do array das linhas) que estão usando o nó.
+    - Line(): classe que representa uma linha
+        -Tem como variáveis
+            - node1: ponto inicial da linha(objeto);
+            - node2: ponto final da linha(objeto);
+            - carga: carga distribuída aplicada na linha;
+
+    - drawLine(): função responsável por desenhar uma linha
+        - Tem como argumento a linha que será desenhada
+    - drawNode(): função responsável por desenhar um ponto
+        - Tem como argumento o ponto que será desenhado
+
+    - insertNode: Função que insere um ponto, é chamada por um input de botão na secção de inserir um ponto.
+        - inicia buscando no html a posição do ponto e salvando nas variáveis x e y.
+        - depois busca no html as forças em x e y e o tipo de vinculação do ponto e salva nas variáveis forceX, forceY e vinc.
+        - cria um objeto da classe Node, passando os parâmetros obtidos do html
+        - insere o ponto criado(obejeto do tipo Node) no array dos pontos
+        - desenha o ponto criado
+        - Insere o ponto criado nos selects do ponto inicial e final da linha e select do no para ser editado ou removido
+    - insertLine: função que insere uma linha, é por um botão na secção de inserir uma linha
+        - busca os pontos incial e final do html e salva nas variáveis node1 e node2
+        - faz a validação se os pontos foram selecionados;
+        - busca a carga no html e salva num obejto com nome de carga
+        - cria um objeto linha da classe Linha;
+        - coloca o objeto criado no array das linhas
+        - salva a posição do array em que a linha foi colocada nos objetos do ponto final e inicial da linha;
+        - desenha a linha
+    - EditiNode: função que edita um ponto, chamada por um botão na secçao de edição de um ponto
+        - verifica se um ponto foi realmente selecionado
+        - modifica as características do ponto selecionado
+        - modifica as caracteríticas do ponto nos selects
+        - desenha as modificações no canvas
+    - removeNode
+        - criar a variável indexRemove com o número do ponto(posição no array mais 1, pois o array começa na posição 0 e o primeiro ponto é chamado de 1 )
+        - atentica se algum ponto foi selecionado
+        - verifica se o ponto já está sendo usado por alguma linha
+        - cria uma lista com as <option> dos <select> que contem os pontos com o nome de selectNodes. Isso é feito para que todos os <select> sejam alterados quando o no for apagado. O mesmo foi feito para a função editNode()
+        - Apaga o nó dos selects
+        - Muda o nome dos demais pontos nos selects
+        - Apaga o ponto
+        - Atualiza o canvas
+        - volta o formulario do ponto para edição para p padrão
+
+    - Criando a parte que controla os menus
