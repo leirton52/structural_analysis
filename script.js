@@ -279,7 +279,7 @@ function editNode(){
 }
 
 function removeNode() {
-    indexRemove = Number(nodeForEdtion.value) + 1
+    let indexRemove = Number(nodeForEdtion.value)
     if(nodeForEdtion.value == "Selecione um ponto"){
         window.alert("Selecione um ponto")
     }else{
@@ -289,21 +289,23 @@ function removeNode() {
             return
         }
 
-        let selectNodes = document.getElementsByClassName(`no${indexRemove}`)
-
+        let selectNodes = document.getElementsByClassName(`no${indexRemove + 1}`)
+        
+        //como os itens vão se apagando dos selects, o tamanho dele em algum momento será 0 e o loop acabará
          while (selectNodes.length > 0){
             let item = selectNodes[0]
             item.parentNode.removeChild(item)
         }
-//continuar daqui modificar valores da seleção dos nós restantes
-        for(i=indexRemove + 1; i<=nodes.length; i++){
-            let node = document.getElementsByClassName(`no${i}`)
+        
+        //continuar daqui modificar valores da seleção dos nós restantes
+        for(i=indexRemove + 1; i<nodes.length; i++){
+            let node = document.getElementsByClassName(`no${i + 1}`)
 
-            while (node.length >0){
+            //Como muda a classe do ponto, a lista "node" vai perdendo os elementos e quando o comprimento da lista for 0 o loop acaba
+            while (node.length >0) {
                 let item = node[0]
                
-                //o menos 2 é porque vetores começam a contar do zero
-                let posAtualArr = i - 2
+                let posAtualArr = i - 1
 
                 item.value = posAtualArr
                 item.text = `no ${posAtualArr + 1}, x: ${nodes[posAtualArr + 1].x}, y: ${nodes[posAtualArr + 1].y}`
@@ -312,7 +314,7 @@ function removeNode() {
 
         }
 
-        nodes.splice(nodeForEdtion.value,1)
+        nodes.splice(indexRemove,1)
 
         ctx.clearRect(0, 0, screen.width, screen.height)   
         nodes.forEach( node => {
