@@ -1,6 +1,4 @@
-- Corrigir bug do remover pontos
-
--adicionar forças e cargas horizontais
+-adicionar cargas horizontais
 
 -criar a função que modifica uma linha
 

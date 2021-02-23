@@ -336,22 +336,31 @@ function removeNode() {
 let secAddPonto = document.getElementById("secAddPonto")
 let secAddLinha = document.getElementById("secAddLinha")
 let secEditPonto = document.getElementById("secEditPonto")
+let secEditLine = document.getElementById("secEditLine")
 function menuAddPonto(){
     secAddPonto.className = "show"
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
+    secEditLine.className = "hide"
 }
 function menuAddLinha(){
     secAddPonto.className = "hide"
     secAddLinha.className = "show"
     secEditPonto.className = "hide"
+    secEditLine.className = "show"
 }
 function menuEditPonto(){
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "show"
+    secEditLine.className = "hide"
 }
-
+function menuEditLine(){
+    secAddPonto.className = "hide"
+    secAddLinha.className = "hide"
+    secEditPonto.className = "hide"
+    secEditLine.className = "show"
+}
 
 const reaction = {
     rx: 30,

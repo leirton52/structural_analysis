@@ -9,6 +9,7 @@
             <input type="button" value="inserir ponto" onclick="menuAddPonto()">
             <input type="button" value="inserir linha" onclick="menuAddLinha()">
             <input type="button" value="editar ponto" onclick="menuEditPonto()">
+            <input type="button" value="editar Linha" onclick="menuEditLine()">
         </div>
         <div id=tudo>
             <div>
@@ -62,6 +63,21 @@
                         <input type="button" value="modificar" onclick="editNode()">
                         <input type="button" value="remover" onclick="removeNode()">
                     </div>
+                </section>
+                <section id="secEditLine" class="hide">
+                    <p>Editar Linha</p>
+                    <p><select id="lineForEdtion">
+                        <option>Selecione uma linha</option>
+                    </select></p>
+                    <p>Ponto inicial: <select name="node1ForLineEdtion" id="node1ForLineEdtion">
+                        <option>Selecione</option>
+                    </select></p>
+                    <p>Ponto final: <select name="node2ForLineEdtion" id="node2ForLineEdtion">
+                        <option>Selecione</option>
+                    </select></p>
+                    <p>Carga Inicial:<input type="Number" id="cargaInicioEdtion" value="0"></p>
+                    <p>Carga Final: <input type="Number" id="cargaFimEdtion" value="0"></p>
+                    <p><input type="button" value="inserir" onclick="insertLine()"></p> 
                 </section>
             </div>
         </div>
