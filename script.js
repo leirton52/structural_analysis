@@ -5,6 +5,8 @@ let ctx = screen.getContext("2d") //pegando o contexto do canvas
 let node1ForLine = document.getElementById('node1ForLine')
 let node2ForLine = document.getElementById('node2ForLine')
 let nodeForEdtion = document.getElementById('nodeForEdtion')
+let node1ForLineEdtion = document.getElementById('node1ForLineEdtion')
+let node2ForLineEdtion = document.getElementById('node2ForLineEdtion')
 
 //criando os vetores onde serão armasenadas as linhas, os nos e as cargas
 let lines = []
@@ -172,24 +174,33 @@ function insertNode() {
 
         nodes.push(node)
         drawNode(node)
+
+        let classNode = `no${nodes.length}`
+        let nameNode = `no ${nodes.length}: x:${x.value}, y:${y.value}`
+
+        /*function addNodeSelect(select, classNode, nameNode){
+            let item = document.createElement('option')
+            item.text = nameNode
+            item.value = nodes.length - 1
+            item.classList.add(classNode)
+            select.appendChild(item)
+        }*/
+
+        let selectNode = document.getElementsByClassName('selectNode')
+
+        for(let i=0; i < selectNode.length; i++){
+            let item = document.createElement('option')
+            item.text = nameNode
+            item.value = nodes.length - 1
+            item.classList.add(classNode)
+            selectNode[i].appendChild(item)    
+        }
    
-        let item1 = document.createElement('option')
-        item1.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
-        item1.value = nodes.length - 1
-        item1.classList.add(`no${nodes.length}`)
-        node1ForLine.appendChild(item1)
-        
-        let item2 = document.createElement('option')
-        item2.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
-        item2.value = nodes.length - 1
-        item2.classList.add(`no${nodes.length}`)
-        node2ForLine.appendChild(item2)
-        
-        let item3 = document.createElement('option')
-        item3.text = `no ${nodes.length}: x:${x.value}, y:${y.value}`
-        item3.value = nodes.length - 1
-        item3.classList.add(`no${nodes.length}`)
-        nodeForEdtion.appendChild(item3)
+        /*addNodeSelect(node1ForLine, classNode, nameNode)
+        addNodeSelect(node2ForLine, classNode, nameNode)
+        addNodeSelect(nodeForEdtion, classNode, nameNode)
+        addNodeSelect(node1ForLineEdtion, classNode, nameNode)
+        addNodeSelect(node2ForLineEdtion, classNode, nameNode)*/
    }else{
         window.alert("falta algum valor")        
    }
