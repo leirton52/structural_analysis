@@ -216,6 +216,7 @@ function insertLine(){
        item.value = lines.length - 1
        lineForEdtion.appendChild(item)
 
+       //salvando nos pontos a informação de qual linhas o estão usando
        nodes[node1.value].lines.push(lines.length-1)
        nodes[node2.value].lines.push(lines.length-1)
        
@@ -285,6 +286,48 @@ function editNode(){
         item.text = `no ${Number(nodeForEdtion.value) + 1}, x: ${nodes[nodeForEdtion.value].x}, y: ${nodes[nodeForEdtion.value].y}`
     }
     //acaba a modificação do select
+
+    //desenha as modificações no canvas
+    ctx.clearRect(0, 0, screen.width, screen.height)
+    
+    nodes.forEach( node => {
+        drawNode(node)
+    })
+    
+    lines.forEach(line => {
+       drawLine(line) 
+    })
+}
+
+//função que edita uma linha
+function edtiLine(){
+    if (lineForEdtion.value == "Selecione uma linha"){
+        window.alert("Selecione uma linha")
+        return
+    }
+
+    //apagando as linhas dos pontos que ela está usado, para colocala nos pontos que serão modificados
+    lines[lineForEdtion.value]
+    .node1
+    .lines.splice(
+        lines[lineForEdtion.value].node1.lines.indexOf(lineForEdtion), 1
+    )
+
+    lines[lineForEdtion.value]
+    .node2
+    .lines.splice(
+        lines[lineForEdtion.value].node2.lines.indexOf(lineForEdtion), 1
+    )
+
+    //modifica as propriedades da linha
+    lines[lineForEdtion.value].node1 = nodes[node1ForLineEdtion.value]
+    lines[lineForEdtion.value].node2 = nodes[node2ForLineEdtion.value]
+    lines[lineForEdtion.value].carga.cargaInicio = cargaInicioEdtion.value
+    lines[lineForEdtion.value].carga.cargaFim = cargaFimEdtion.value
+
+    //Colocando a inforção da linha nos pontos que a estão usando
+    lines[lineForEdtion.value].node1.lines.push(Number(lineForEdtion.value))
+    lines[lineForEdtion.value].node2.lines.push(Number(lineForEdtion.value))
 
     //desenha as modificações no canvas
     ctx.clearRect(0, 0, screen.width, screen.height)
