@@ -382,19 +382,36 @@ function menuEditLine(){
     secEditLine.className = "show"
 }
 
-const reaction = {
-    rx: 30,
-    ry: 40,
-    m: 5,
-}
-const no1 = new Node(100, 200, 50, 30,'engastado',reaction)
-const no2 = new Node(300, 200, 0, 20, 'rotulado', reaction)
-const carga1 = {
-    cargaInicio: 60,
-    cargaFim: 60
-}
-const line1 = new Line(no1, no2, carga1)
 
-drawLine(line1)
-drawNode(no1)
-drawNode(no2)
+//Parte para ajudar nos testes
+//Criando alguns pontos
+for(i=1 ; i<=4; i++){
+    let x = document.getElementById("posX")
+    let y = document.getElementById("posY")
+    let forceX = document.getElementById("forceX")
+    let forceY = document.getElementById("forceY")
+
+    x.value = i*100 - 50
+    y.value = 100
+    forceX.value = 0
+    forceY.value  = 10*i+10
+    
+    insertNode()
+}
+
+//Criando algumas linha
+for(i=1; i<=4; i++){
+    if(i%2 != 0){
+        let node1 = document.getElementById("node1ForLine")
+        let node2 = document.getElementById("node2ForLine")
+        let cargaInicio = document.getElementById('cargaInicio')
+        let cargaFim = document.getElementById('cargaFim')
+
+        node1.value = i-1
+        node2.value = i
+        cargaInicio.value = (i-1)*10
+        cargaFim.value = i*10
+
+        insertLine()
+    }
+}
