@@ -7,6 +7,7 @@ let node2ForLine = document.getElementById('node2ForLine')
 let nodeForEdtion = document.getElementById('nodeForEdtion')
 let node1ForLineEdtion = document.getElementById('node1ForLineEdtion')
 let node2ForLineEdtion = document.getElementById('node2ForLineEdtion')
+let lineForEdtion = document.getElementById('lineForEdtion')
 
 //criando os vetores onde serão armasenadas as linhas, os nos e as cargas
 let lines = []
@@ -178,14 +179,6 @@ function insertNode() {
         let classNode = `no${nodes.length}`
         let nameNode = `no ${nodes.length}: x:${x.value}, y:${y.value}`
 
-        /*function addNodeSelect(select, classNode, nameNode){
-            let item = document.createElement('option')
-            item.text = nameNode
-            item.value = nodes.length - 1
-            item.classList.add(classNode)
-            select.appendChild(item)
-        }*/
-
         let selectNode = document.getElementsByClassName('selectNode')
 
         for(let i=0; i < selectNode.length; i++){
@@ -195,12 +188,6 @@ function insertNode() {
             item.classList.add(classNode)
             selectNode[i].appendChild(item)    
         }
-   
-        /*addNodeSelect(node1ForLine, classNode, nameNode)
-        addNodeSelect(node2ForLine, classNode, nameNode)
-        addNodeSelect(nodeForEdtion, classNode, nameNode)
-        addNodeSelect(node1ForLineEdtion, classNode, nameNode)
-        addNodeSelect(node2ForLineEdtion, classNode, nameNode)*/
    }else{
         window.alert("falta algum valor")        
    }
@@ -223,6 +210,11 @@ function insertLine(){
        let line = new Line(nodes[node1.value], nodes[node2.value], carga)
 
        lines.push(line)
+
+       let item = document.createElement('option')
+       item.text = `Linha ${lines.length}`
+       item.value = lines.length - 1
+       lineForEdtion.appendChild(item)
 
        nodes[node1.value].lines.push(lines.length-1)
        nodes[node2.value].lines.push(lines.length-1)
@@ -250,6 +242,23 @@ nodeForEdtion.addEventListener('change', (event) => {
         edtionForceX.value = nodes[nodeForEdtion.value].forceX
         edtionForceY.value = nodes[nodeForEdtion.value].forceY
         edtionVinc.value = nodes[nodeForEdtion.value].vinc
+    }
+})
+
+//coloca valores nos elementos da edição de uma Linha
+let cargaInicioEdtion = document.getElementById("cargaInicioEdtion")
+let cargaFimEdtion = document.getElementById("cargaFimEdtion")
+lineForEdtion.addEventListener('change', (event) => {
+    if(lineForEdtion.value == "Selecione uma linha"){
+        node1ForLineEdtion.value = 'Selecione'
+        node2ForLineEdtion.value = 'Selecione'
+        cargaInicioEdtion.value = null
+        cargaFimEdtion.value = null
+    }else{
+        node1ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node1)
+        node2ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node2)
+        cargaInicioEdtion.value = lines[lineForEdtion.value].carga.cargaInicio
+        cargaFimEdtion.value = lines[lineForEdtion.value].carga.cargaFim
     }
 })
 
@@ -358,7 +367,7 @@ function menuAddLinha(){
     secAddPonto.className = "hide"
     secAddLinha.className = "show"
     secEditPonto.className = "hide"
-    secEditLine.className = "show"
+    secEditLine.className = "hide"
 }
 function menuEditPonto(){
     secAddPonto.className = "hide"
