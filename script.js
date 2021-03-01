@@ -214,6 +214,7 @@ function insertLine(){
        let item = document.createElement('option')
        item.text = `Linha ${lines.length}`
        item.value = lines.length - 1
+       item.setAttribute('id', `optionLine${lines.length}`)
        lineForEdtion.appendChild(item)
 
        //salvando nos pontos a informação de qual linhas o estão usando
@@ -393,6 +394,56 @@ function removeNode() {
         edtionForceX.value = null
         edtionForceY.value = null
         edtionVinc.value = "Nenhuma"
+    }
+}
+
+function removeLine() {
+    let indexRemove = Number(lineForEdtion.value)
+    if(lineForEdtion.value == "Selecione uma linha"){
+        window.alert("Selecione uma linha")
+    }else{
+        //apagando a iformação dos pontos das linhas que os estavam usando
+        lines[lineForEdtion.value]
+        .node1
+        .lines.splice(
+            lines[lineForEdtion.value].node1.lines.indexOf(lineForEdtion.value), 1
+        )
+
+        lines[lineForEdtion.value]
+        .node2
+        .lines.splice(
+            lines[lineForEdtion.value].node2.lines.indexOf(lineForEdtion.value), 1
+        )
+
+        //apgando linha
+        item = document.getElementById(`optionLine${Number(lineForEdtion.value) + 1}`)
+
+        item.parentNode.removeChild(item)
+
+        lines.splice(indexRemove,1)
+
+        //Reorganizando as linhas
+        for(let i = indexRemove; i<lines.length; i++){
+            let item = document.getElementById(`optionLine${i + 2}`)
+            item.value = i
+            item.text = `Linha ${i + 1}`
+            item.id = `optionLine${i + 1}`
+            //falta modificar a nos pontos a informação das linhas que os usam
+        }
+
+        ctx.clearRect(0, 0, screen.width, screen.height)   
+        nodes.forEach( node => {
+            drawNode(node)
+        })
+        lines.forEach(line => {
+            drawLine(line) 
+        })
+
+        lineForEdtion.value = "Selecione uma linha"
+        node1ForLineEdtion.value = 'Selecione'
+        node2ForLineEdtion.value = 'Selecione'
+        cargaInicioEdtion.value = 0
+        cargaFimEdtion.value = 0
     }
 }
 
