@@ -403,6 +403,17 @@ function removeLine() {
         window.alert("Selecione uma linha")
     }else{
         //apagando a iformação dos pontos das linhas que os estavam usando
+        console.log(`linhas no1: ${
+            lines[lineForEdtion.value]
+        .node1
+        .lines
+        }`)
+        console.log(`linhas no2: ${
+            lines[lineForEdtion.value]
+        .node2
+        .lines
+        }`)
+        
         lines[lineForEdtion.value]
         .node1
         .lines.splice(
@@ -415,7 +426,18 @@ function removeLine() {
             lines[lineForEdtion.value].node2.lines.indexOf(lineForEdtion.value), 1
         )
 
-        //apgando linha
+        console.log(`linhas no1: ${
+            lines[lineForEdtion.value]
+        .node1
+        .lines
+        }`)
+        console.log(`linhas no2: ${
+            lines[lineForEdtion.value]
+        .node2
+        .lines
+        }`)
+
+        //apagando linha
         item = document.getElementById(`optionLine${Number(lineForEdtion.value) + 1}`)
 
         item.parentNode.removeChild(item)
@@ -428,7 +450,9 @@ function removeLine() {
             item.value = i
             item.text = `Linha ${i + 1}`
             item.id = `optionLine${i + 1}`
-            //falta modificar a nos pontos a informação das linhas que os usam
+            //falta modificar nos pontos a informação das linhas que os usam
+            //item.node1.lines[item.node1.lines.indexOf(i+1)] = i
+            //item.node1.lines[item.node2.lines.indexOf(i+1)] = i
         }
 
         ctx.clearRect(0, 0, screen.width, screen.height)   
