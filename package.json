@@ -1,0 +1,22 @@
+{
+  "name": "structural_analysis",
+  "version": "1.0.0",
+  "description": "aplicação para calculos estruturais simples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leirton52/structural_analysis.git"
+  },
+  "author": "Leirton Freitas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leirton52/structural_analysis/issues"
+  },
+  "homepage": "https://github.com/leirton52/structural_analysis#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
