@@ -33,7 +33,7 @@ function drawLine(line) {
     ctx.fillStyle = 'black'
     ctx.font = '15px arial'
     ctx.fillText(`${line.carga.cargaInicio}`, line.node1.x, line.node1.y-line.carga.cargaInicio-3)
-    ctx.fillText(`${line.carga.cargaInicio}`, line.node2.x, line.node2.y-line.carga.cargaFim-3)
+    ctx.fillText(`${line.carga.cargaFim}`, line.node2.x, line.node2.y-line.carga.cargaFim-3)
     
     //desenha a linha
     ctx.beginPath()
@@ -51,7 +51,7 @@ function drawNode(node){
     ctx.fill()
 
     //desenhado a força
-    if(node.forceX != 0){
+    if(node.forceX > 0){
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'black'
         ctx.lineWidth = 1
@@ -70,9 +70,28 @@ function drawNode(node){
         
         ctx.font = "15px arial"
         ctx.fillText(node.forceX, node.x - node.forceX, node.y)
+    } else if (node.forceX<0){
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'black'
+        ctx.lineWidth = 1
+      
+        ctx.beginPath()
+        ctx.moveTo(node.x-node.forceX, node.y)
+        ctx.lineTo(node.x, node.y)
+        ctx.stroke()
+        
+
+        ctx.beginPath()
+        ctx.moveTo(node.x, node.y)
+        ctx.lineTo(node.x+10, node.y-5)
+        ctx.lineTo(node.x+10, node.y+5)
+        ctx.fill()
+        
+        ctx.font = "15px arial"
+        ctx.fillText(node.forceX, node.x - node.forceX, node.y)
     }
 
-    if(node.forceY != 0){
+    if(node.forceY > 0){
         ctx.strokeStyle = 'black'
         ctx.fillStyle = 'black'
         ctx.lineWidth = 1
@@ -86,7 +105,20 @@ function drawNode(node){
         ctx.fill()
         ctx.font = "15px arial"
         ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
-
+    } else if (node.forceY < 0) {
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'black'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(node.x, node.y - node.forceY)
+        ctx.lineTo(node.x, node.y)
+        ctx.lineTo(node.x-5,node.y+10)
+        ctx.lineTo(node.x+5, node.y+10)
+        ctx.lineTo(node.x, node.y)
+        ctx.stroke()
+        ctx.fill()
+        ctx.font = "15px arial"
+        ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
     }
 
     if(node.vinc == "apoiado"){

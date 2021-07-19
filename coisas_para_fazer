@@ -1,12 +1,6 @@
--adicionar cargas horizontais
-
--criar a função que modifica uma linha
-
--criar uma função que remove linha
+- adicionar cargas e carregamentos horizontais
 
 -criar as caracteristicas do material e de forma para as linhas
-
--Fazer uma funcionalidade para que os pontos saibam quais linhas os estão utilizando.
 
 -organizar a interface da aplicação(ajeitar o style.css)
 
@@ -18,3 +12,6 @@
 
 -Criar testes
 
+- corrigir bug dos carregamentos distribuídos (print dos valores do carregamento)
+
+- detalhar mais opções para os apoios;
