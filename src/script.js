@@ -403,56 +403,41 @@ function removeLine() {
         window.alert("Selecione uma linha")
     }else{
         //apagando a iformação dos pontos das linhas que os estavam usando
-        console.log(`linhas no1: ${
-            lines[lineForEdtion.value]
-        .node1
-        .lines
-        }`)
-        console.log(`linhas no2: ${
-            lines[lineForEdtion.value]
-        .node2
-        .lines
-        }`)
+        let line = lines[lineForEdtion.value] 
         
-        lines[lineForEdtion.value]
-        .node1
-        .lines.splice(
-            lines[lineForEdtion.value].node1.lines.indexOf(lineForEdtion.value), 1
-        )
+        let node1 = line.node1
+        let node2 = line.node2
+        
 
-        lines[lineForEdtion.value]
-        .node2
-        .lines.splice(
-            lines[lineForEdtion.value].node2.lines.indexOf(lineForEdtion.value), 1
+        
+        node1.lines.splice(
+            node1.lines.indexOf(indexRemove), 1
         )
-
-        console.log(`linhas no1: ${
-            lines[lineForEdtion.value]
-        .node1
-        .lines
-        }`)
-        console.log(`linhas no2: ${
-            lines[lineForEdtion.value]
-        .node2
-        .lines
-        }`)
+        node2.lines.splice(
+            node2.lines.indexOf(indexRemove), 1
+        )
 
         //apagando linha
-        item = document.getElementById(`optionLine${Number(lineForEdtion.value) + 1}`)
+        item = document.getElementById(`optionLine${indexRemove + 1}`)
 
         item.parentNode.removeChild(item)
 
         lines.splice(indexRemove,1)
-
-        //Reorganizando as linhas
+        
+        //Reorganizando as linhas e a informação do no que faz parte de cada linha
         for(let i = indexRemove; i<lines.length; i++){
             let item = document.getElementById(`optionLine${i + 2}`)
             item.value = i
             item.text = `Linha ${i + 1}`
             item.id = `optionLine${i + 1}`
-            //falta modificar nos pontos a informação das linhas que os usam
-            //item.node1.lines[item.node1.lines.indexOf(i+1)] = i
-            //item.node1.lines[item.node2.lines.indexOf(i+1)] = i
+            
+            let line = lines[i]
+
+            let node1 = line.node1
+            let node2 = line.node2
+
+            node1.lines[node1.lines.indexOf(i+1)] = i
+            node2.lines[node2.lines.indexOf(i+1)] = i
         }
 
         ctx.clearRect(0, 0, screen.width, screen.height)   
@@ -532,4 +517,4 @@ for(i=1; i<=4; i++){
 
         insertLine()
     }
-}
+}   
