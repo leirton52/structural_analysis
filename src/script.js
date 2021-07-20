@@ -1,7 +1,7 @@
 let screen = document.getElementById('screen') //pegando o canvas do html
 let ctx = screen.getContext("2d") //pegando o contexto do canvas
 
-//seleção que guarda os nós criados
+//seleções que guarda os nós criados
 let node1ForLine = document.getElementById('node1ForLine')
 let node2ForLine = document.getElementById('node2ForLine')
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -22,7 +22,7 @@ function drawLine(line) {
     ctx.strokeStyle = "green"
     ctx.fillStyle = 'rgba(0,0,200, 0.5)'
    
-    //deseha a carga
+    //deseha a carga vertical (Y)
     ctx.beginPath()
     ctx.moveTo(line.node1.x, line.node1.y)
     ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicioY)
@@ -34,7 +34,21 @@ function drawLine(line) {
     ctx.font = '15px arial'
     ctx.fillText(`${line.carga.cargaInicioY}`, line.node1.x, line.node1.y-line.carga.cargaInicioY-3)
     ctx.fillText(`${line.carga.cargaFimY}`, line.node2.x, line.node2.y-line.carga.cargaFimY-3)
-    
+
+    //deseha a carga horizontal (X)
+    ctx.fillStyle = 'rgba(255,255,0, 0.5)'
+    ctx.beginPath()
+    ctx.moveTo(line.node1.x, line.node1.y)
+    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicioX)
+    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFimX)
+    ctx.lineTo(line.node2.x, line.node2.y)
+    ctx.fill()
+
+    ctx.fillStyle = 'black'
+    ctx.font = '15px arial'
+    ctx.fillText(`${line.carga.cargaInicioX}`, line.node1.x, line.node1.y-line.carga.cargaInicioX-3)
+    ctx.fillText(`${line.carga.cargaFimX}`, line.node2.x, line.node2.y-line.carga.cargaFimX-3)
+
     //desenha a linha
     ctx.beginPath()
     ctx.moveTo(line.node1.x, line.node1.y)
@@ -232,9 +246,14 @@ function insertLine(){
    if(node1.value == "Selecione" || node2.value == "Selecione"){
         window.alert('Selecione o ponto inicial e final')
    }else{
+       let cargaInicioX = document.getElementById('cargaInicioX')
+       let cargaFimX = document.getElementById('cargaFimX')
        let cargaInicioY = document.getElementById('cargaInicioY')
        let cargaFimY = document.getElementById('cargaFimY')
+
        carga = {
+            cargaInicioX: Number(cargaInicioX.value),
+            cargaFimX: Number(cargaFimX.value),
             cargaInicioY: Number(cargaInicioY.value),
             cargaFimY: Number(cargaFimY.value)
        }
@@ -280,17 +299,23 @@ nodeForEdtion.addEventListener('change', (event) => {
 })
 
 //coloca valores nos elementos da edição de uma Linha
+let cargaInicioEdtionX = document.getElementById("cargaInicioEdtionX")
+let cargaFimEdtionX = document.getElementById("cargaFimEdtionX")
 let cargaInicioEdtionY = document.getElementById("cargaInicioEdtionY")
 let cargaFimEdtionY = document.getElementById("cargaFimEdtionY")
 lineForEdtion.addEventListener('change', (event) => {
     if(lineForEdtion.value == "Selecione uma linha"){
         node1ForLineEdtion.value = 'Selecione'
         node2ForLineEdtion.value = 'Selecione'
+        cargaInicioEdtionX.value = null
+        cargaFimEdtionX.value = null
         cargaInicioEdtionY.value = null
         cargaFimEdtionY.value = null
     }else{
         node1ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node1)
         node2ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node2)
+        cargaInicioEdtionX.value = lines[lineForEdtion.value].carga.cargaInicioX
+        cargaFimEdtionX.value = lines[lineForEdtion.value].carga.cargaFimX
         cargaInicioEdtionY.value = lines[lineForEdtion.value].carga.cargaInicioY
         cargaFimEdtionY.value = lines[lineForEdtion.value].carga.cargaFimY
     }
@@ -355,6 +380,8 @@ function edtiLine(){
     //modifica as propriedades da linha
     lines[lineForEdtion.value].node1 = nodes[node1ForLineEdtion.value]
     lines[lineForEdtion.value].node2 = nodes[node2ForLineEdtion.value]
+    lines[lineForEdtion.value].carga.cargaInicioX = Number(cargaInicioEdtionX.value)
+    lines[lineForEdtion.value].carga.cargaFimX = Number(cargaFimEdtionX.value)
     lines[lineForEdtion.value].carga.cargaInicioY = Number(cargaInicioEdtionY.value)
     lines[lineForEdtion.value].carga.cargaFimY = Number(cargaFimEdtionY.value)
 
@@ -483,6 +510,8 @@ function removeLine() {
         lineForEdtion.value = "Selecione uma linha"
         node1ForLineEdtion.value = 'Selecione'
         node2ForLineEdtion.value = 'Selecione'
+        cargaInicioEdtionX.value = 0
+        cargaFimEdtionX.value = 0
         cargaInicioEdtionY.value = 0
         cargaFimEdtionY.value = 0
     }
@@ -539,11 +568,15 @@ for(i=1; i<=4; i++){
     if(i%2 != 0){
         let node1 = document.getElementById("node1ForLine")
         let node2 = document.getElementById("node2ForLine")
+        let cargaInicioX = document.getElementById('cargaInicioX')
+        let cargaFimX = document.getElementById('cargaFimX')
         let cargaInicioY = document.getElementById('cargaInicioY')
         let cargaFimY = document.getElementById('cargaFimY')
 
         node1.value = i-1
         node2.value = i
+        cargaInicioX.value = (i-1)*5
+        cargaFimX.value = i*5
         cargaInicioY.value = (i-1)*10
         cargaFimY.value = i*10
 
