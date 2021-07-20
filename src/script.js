@@ -25,15 +25,15 @@ function drawLine(line) {
     //deseha a carga
     ctx.beginPath()
     ctx.moveTo(line.node1.x, line.node1.y)
-    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicio)
-    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFim)
+    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicioY)
+    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFimY)
     ctx.lineTo(line.node2.x, line.node2.y)
     ctx.fill()
 
     ctx.fillStyle = 'black'
     ctx.font = '15px arial'
-    ctx.fillText(`${line.carga.cargaInicio}`, line.node1.x, line.node1.y-line.carga.cargaInicio-3)
-    ctx.fillText(`${line.carga.cargaFim}`, line.node2.x, line.node2.y-line.carga.cargaFim-3)
+    ctx.fillText(`${line.carga.cargaInicioY}`, line.node1.x, line.node1.y-line.carga.cargaInicioY-3)
+    ctx.fillText(`${line.carga.cargaFimY}`, line.node2.x, line.node2.y-line.carga.cargaFimY-3)
     
     //desenha a linha
     ctx.beginPath()
@@ -232,11 +232,11 @@ function insertLine(){
    if(node1.value == "Selecione" || node2.value == "Selecione"){
         window.alert('Selecione o ponto inicial e final')
    }else{
-       let cargaInicio = document.getElementById('cargaInicio')
-       let cargaFim = document.getElementById('cargaFim')
+       let cargaInicioY = document.getElementById('cargaInicioY')
+       let cargaFimY = document.getElementById('cargaFimY')
        carga = {
-            cargaInicio: Number(cargaInicio.value),
-            cargaFim: Number(cargaFim.value)
+            cargaInicioY: Number(cargaInicioY.value),
+            cargaFimY: Number(cargaFimY.value)
        }
        
        let line = new Line(nodes[node1.value], nodes[node2.value], carga)
@@ -280,19 +280,19 @@ nodeForEdtion.addEventListener('change', (event) => {
 })
 
 //coloca valores nos elementos da edição de uma Linha
-let cargaInicioEdtion = document.getElementById("cargaInicioEdtion")
-let cargaFimEdtion = document.getElementById("cargaFimEdtion")
+let cargaInicioEdtionY = document.getElementById("cargaInicioEdtionY")
+let cargaFimEdtionY = document.getElementById("cargaFimEdtionY")
 lineForEdtion.addEventListener('change', (event) => {
     if(lineForEdtion.value == "Selecione uma linha"){
         node1ForLineEdtion.value = 'Selecione'
         node2ForLineEdtion.value = 'Selecione'
-        cargaInicioEdtion.value = null
-        cargaFimEdtion.value = null
+        cargaInicioEdtionY.value = null
+        cargaFimEdtionY.value = null
     }else{
         node1ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node1)
         node2ForLineEdtion.value = nodes.indexOf(lines[lineForEdtion.value].node2)
-        cargaInicioEdtion.value = lines[lineForEdtion.value].carga.cargaInicio
-        cargaFimEdtion.value = lines[lineForEdtion.value].carga.cargaFim
+        cargaInicioEdtionY.value = lines[lineForEdtion.value].carga.cargaInicioY
+        cargaFimEdtionY.value = lines[lineForEdtion.value].carga.cargaFimY
     }
 })
 
@@ -355,8 +355,8 @@ function edtiLine(){
     //modifica as propriedades da linha
     lines[lineForEdtion.value].node1 = nodes[node1ForLineEdtion.value]
     lines[lineForEdtion.value].node2 = nodes[node2ForLineEdtion.value]
-    lines[lineForEdtion.value].carga.cargaInicio = cargaInicioEdtion.value
-    lines[lineForEdtion.value].carga.cargaFim = cargaFimEdtion.value
+    lines[lineForEdtion.value].carga.cargaInicioY = Number(cargaInicioEdtionY.value)
+    lines[lineForEdtion.value].carga.cargaFimY = Number(cargaFimEdtionY.value)
 
     //Colocando a inforção da linha nos pontos que a estão usando
     lines[lineForEdtion.value].node1.lines.push(Number(lineForEdtion.value))
@@ -483,8 +483,8 @@ function removeLine() {
         lineForEdtion.value = "Selecione uma linha"
         node1ForLineEdtion.value = 'Selecione'
         node2ForLineEdtion.value = 'Selecione'
-        cargaInicioEdtion.value = 0
-        cargaFimEdtion.value = 0
+        cargaInicioEdtionY.value = 0
+        cargaFimEdtionY.value = 0
     }
 }
 
@@ -539,13 +539,13 @@ for(i=1; i<=4; i++){
     if(i%2 != 0){
         let node1 = document.getElementById("node1ForLine")
         let node2 = document.getElementById("node2ForLine")
-        let cargaInicio = document.getElementById('cargaInicio')
-        let cargaFim = document.getElementById('cargaFim')
+        let cargaInicioY = document.getElementById('cargaInicioY')
+        let cargaFimY = document.getElementById('cargaFimY')
 
         node1.value = i-1
         node2.value = i
-        cargaInicio.value = (i-1)*10
-        cargaFim.value = i*10
+        cargaInicioY.value = (i-1)*10
+        cargaFimY.value = i*10
 
         insertLine()
     }
