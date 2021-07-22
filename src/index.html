@@ -87,7 +87,7 @@
                         <input type="button" value="Remover" onclick="removeLine()">
                     </div>
                 </section>
-                <section id="secMaterialForma" >
+                <section id="secMaterialForma" class="hide">
                     <div>
                         <h1>Material</h1>
                         <p>Tipo: <input type="text" name="tipoMaterial" id="tipoMaterial" value="concreto"></p>
@@ -96,10 +96,10 @@
                     <div>
                         <h1>Forma</h1>
                         <p>Retangular</p>
-                        <p>largura b = <input type="number" name="largura" id="largura"> m</p>
-                        <p>comprimento h = <input type="number" name="comprimento" id="comprimento"> m</p>
-                        <p>área = </p>
-                        <p>momento de inercia = </p>
+                        <p>largura b = <input type="number" name="base" id="base"> m</p>
+                        <p>comprimento h = <input type="number" name="altura" id="altura"> m</p>
+                        <p id='area'>área = </p>
+                        <p id='inercia'>momento de inércia = </p>
                     </div>
                     <div>
                         <input type="button" value="adicionar" onclick="addMaterialForma()">

@@ -207,6 +207,46 @@ function Line(node1, node2, carga) {
      this.carga=carga
 }
 
+// Objeto que guarda as caracteristicas das linhas
+const prop = {
+    material:{},
+    geometrica:{}
+}
+
+//Funçã que recebe as caracteristicas do material
+function addMaterialForma() {
+    b = document.getElementById('base')
+    h = document.getElementById('altura')
+
+    if(b.value && h.value){
+        prop.material.tipo = document.getElementById('tipoMaterial').value
+        prop.material.modElas = Number(document.getElementById('modElas').value)
+        prop.geometrica.base = Number(b.value)
+        prop.geometrica.altura = Number(h.value)
+
+        if(prop.material.modElas <= 0){
+            window.alert('O modulo de elasticidade tem que ser maior que zero')
+            return
+        }
+        if(prop.geometrica.base <= 0){
+            window.alert('a base tem que ser maior que zero')
+            return
+        }
+        if(prop.geometrica.altura <= 0){
+            window.alert('a altura tem que ser maior que zero')
+            return
+        }
+
+        prop.geometrica.area = prop.geometrica.base * prop.geometrica.altura 
+        prop.geometrica.inercia = (prop.geometrica.base * Math.pow(prop.geometrica.altura,3))/12
+        
+        document.getElementById('area').innerText = `área = ${prop.geometrica.area} m²`
+        document.getElementById('inercia').innerText = `momento de inércia = ${prop.geometrica.inercia} m⁴`
+    }else{
+        window.alert('insira a base e a altura das barras')
+    }
+}
+
 //função que insere um nó
 function insertNode() {
    let x = document.getElementById("posX") 
@@ -526,24 +566,35 @@ function menuAddPonto(){
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
+    secMaterialForma.className = "hide"
 }
 function menuAddLinha(){
     secAddPonto.className = "hide"
     secAddLinha.className = "show"
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
+    secMaterialForma.className = "hide"
 }
 function menuEditPonto(){
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "show"
     secEditLine.className = "hide"
+    secMaterialForma.className = "hide"
 }
 function menuEditLine(){
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
     secEditLine.className = "show"
+    secMaterialForma.className = "hide"
+}
+function menuMaterialForma(){
+    secAddPonto.className = "hide"
+    secAddLinha.className = "hide"
+    secEditPonto.className = "hide"
+    secEditLine.className = "hide"
+    secMaterialForma.className = "show"
 }
 
 
