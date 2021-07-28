@@ -569,10 +569,10 @@ function removeLine() {
     }
 }
 
-let secAddPonto = document.getElementById("secAddPonto")
-let secAddLinha = document.getElementById("secAddLinha")
-let secEditPonto = document.getElementById("secEditPonto")
-let secEditLine = document.getElementById("secEditLine")
+//let secAddPonto = document.getElementById("secAddPonto")
+//let secAddLinha = document.getElementById("secAddLinha")
+//let secEditPonto = document.getElementById("secEditPonto")
+//let secEditLine = document.getElementById("secEditLine")
 function menuAddPonto(){
     secAddPonto.className = "show"
     secAddLinha.className = "hide"
@@ -607,6 +607,41 @@ function menuMaterialForma(){
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
     secMaterialForma.className = "show"
+}
+
+//passar por todas as linhas e contar as deslocabilidade, mas e os nos que estão sendo usados por
+//mais de uma linha? então é melhor passar por todos os nós, mas primeito indentificar todos os nós que estão sendo utilizados, tavez crie outra propriedade na classe nó se está sendo utilizado ou não(valor boleano)
+//tavez dê para utilizar a caracteristicas dos nós que indentificam as linhas que os estão utiilizando.
+function identificarNumeroDeDeslocabilidades(lines){
+    let qntDesloca = 0
+
+    lines.forEach((line)=>{
+        let vinc1 = line.node1.vinc
+        let vinc2 = line.node2.vinc
+
+        switch (vinc1) {
+            case "Nenhuma":
+                
+                break;
+            case "apoiado-x":
+            
+                break;
+            case "apoiado-y":
+        
+                break;
+            case "biapoiado":
+    
+                break;
+            case "rotulado":
+    
+                break;
+            case "engatado":
+    
+                break;
+            default:
+                break;
+        }
+    })
 }
 
 
