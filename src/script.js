@@ -135,7 +135,19 @@ function drawNode(node){
         ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
     }
 
-    if(node.vinc == "apoiado"){
+    if(node.vinc == "apoiado-x"){
+        ctx.lineWidth = 1
+        ctx.strokeStyle = "black"
+
+        ctx.beginPath()
+        ctx.moveTo(node.x, node.y)
+        ctx.lineTo(node.x - 10, node.y+10)
+        ctx.lineTo(node.x - 10, node.y-10)
+        ctx.lineTo(node.x, node.y)
+        ctx.moveTo(node.x-15, node.y-10)
+        ctx.lineTo(node.x-15, node.y+10)
+        ctx.stroke()
+    }else if(node.vinc == "apoiado-y"){
         ctx.lineWidth = 1
         ctx.strokeStyle = "black"
 

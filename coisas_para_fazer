@@ -1,15 +1,9 @@
-- adicionar cargas e carregamentos horizontais
+- organizar a interface da aplicação(ajeitar o style.css)
 
--criar as caracteristicas do material e de forma para as linhas
+- Autenticar para impedir que um linha seja inserida com o ponto inicial sendo igual ao ponto final
 
--organizar a interface da aplicação(ajeitar o style.css)
+- Autenticar para que duas linhas ou dois pontos não sejam iseridos no mesmo lugar.
 
--começar a criar uma biblioteca para trabalhar com matrizes e sistemas lineares
-
--Autenticar para impedir que um linha seja inserida com o ponto inicial sendo igual ao ponto final
-
--Autenticar para que duas linhas ou dois pontos não sejam iseridos no mesmo lugar.
-
--Criar testes
+- Criar testes
 
 - detalhar mais opções para os apoios;
