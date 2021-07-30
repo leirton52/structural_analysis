@@ -609,41 +609,45 @@ function menuMaterialForma(){
     secMaterialForma.className = "show"
 }
 
-//passar por todas as linhas e contar as deslocabilidade, mas e os nos que estão sendo usados por
-//mais de uma linha? então é melhor passar por todos os nós, mas primeito indentificar todos os nós que estão sendo utilizados, tavez crie outra propriedade na classe nó se está sendo utilizado ou não(valor boleano)
-//tavez dê para utilizar a caracteristicas dos nós que indentificam as linhas que os estão utiilizando.
-function identificarNumeroDeDeslocabilidades(lines){
-    let qntDesloca = 0
-
-    lines.forEach((line)=>{
-        let vinc1 = line.node1.vinc
-        let vinc2 = line.node2.vinc
-
-        switch (vinc1) {
+//função que indentifica o grau de liberdade de um nó
+function qntGrauLiberdade(node){
+    let vinc = node.vinc
+    let lines = node.lines
+    
+    if(lines.length > 0){
+        switch (vinc) {
             case "Nenhuma":
-                
-                break;
+                return 3
             case "apoiado-x":
-            
-                break;
+                return 2
             case "apoiado-y":
-        
-                break;
+                return 2
             case "biapoiado":
-    
-                break;
+                return 1
             case "rotulado":
-    
-                break;
-            case "engatado":
-    
-                break;
-            default:
-                break;
+                return 3
+            case "engastado":
+                return 0
         }
-    })
+    }
 }
 
+//passar por todas as linhas e contar as deslocabilidade, mas e os nos que estão sendo usados por
+//mais de uma linha? então é melhor passar por todos os nós, mas primeito indentificar todos os
+// nós que estão sendo utilizados, tavez crie outra propriedade na classe nó se está sendo utilizado
+//ou não(valor boleano)
+//tavez dê para utilizar a caracteristicas dos nós que indentificam as linhas que os estão utiilizando.
+function totalDeslocabilidades(nodes){
+    let qntDesloca = 0
+
+    nodes.forEach((node)=>{
+        qntDesloca += Number(qntGrauLiberdade(node))
+    })
+
+    return qntDesloca
+}
+
+console.log(totalDeslocabilidades(nodes))
 
 //Parte para ajudar nos testes
 //Criando alguns pontos
@@ -657,6 +661,7 @@ for(i=1 ; i<=4; i++){
     y.value = 100
     forceX.value = 0
     forceY.value  = 10*i+10
+    vinc.value = "engastado"
     
     insertNode()
 }
