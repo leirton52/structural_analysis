@@ -1,6 +1,5 @@
-//falta testar a função qntDeslocaTotal para quando tem nós que não estão sendo usados 
-
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
+import {Node, Line} from "./modules/classes.js"
 
 //seleções que guarda os nós criados
 let node1ForLine = document.getElementById('node1ForLine')
@@ -14,24 +13,6 @@ let lineForEdtion = document.getElementById('lineForEdtion')
 let lines = []
 let nodes = []
 //let cargas = []
-
-//calsse dos nos
-function Node(x=0, y=0, forceX=0, forceY=0, vinc, reaction={rx:0, ry:0, m:0}) {
-    this.x= x
-    this.y= y
-    this.forceX= forceX
-    this.forceY = forceY
-    this.vinc = vinc
-    this.reaction = reaction
-    this.lines = [] //guarda a posição das linhas que estão usando o nó
-}
-
-//classe das linhas
-function Line(node1, node2, carga) {
-     this.node1=node1
-     this.node2=node2
-     this.carga=carga
-}
 
 // Objeto que guarda as caracteristicas das linhas
 const prop = {
