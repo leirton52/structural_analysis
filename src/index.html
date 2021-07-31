@@ -6,11 +6,11 @@
     </head>
     <body>
         <div id="menu">
-            <input type="button" value="inserir ponto" onclick="menuAddPonto()">
-            <input type="button" value="inserir linha" onclick="menuAddLinha()">
-            <input type="button" value="editar ponto" onclick="menuEditPonto()">
-            <input type="button" value="editar Linha" onclick="menuEditLine()">
-            <input type="button" value="Material e forma" onclick="menuMaterialForma()">
+            <input type="button" value="inserir ponto" id="menuAddPonto">
+            <input type="button" value="inserir linha" id="menuAddLinha">
+            <input type="button" value="editar ponto" id="menuEditPonto">
+            <input type="button" value="editar Linha" id="menuEditLine">
+            <input type="button" value="Material e forma" id="menuMaterialForma">
         </div>
         <div id=tudo>
             <div>
@@ -31,7 +31,7 @@
                         <option>engastado</option>
                         <option>rotulado</option>
                     </select></p>
-                    <p><input type="button" value="inserir"  onclick="insertNode()"></p>
+                    <p><input type="button" value="inserir"  id="btn-insert-node"></p>
                 </section>
                 <section id="secAddLinha" class="hide">
                      <p>Linha</p>
@@ -45,7 +45,7 @@
                      <p>Carga Final X: <input type="Number" id="cargaFimX" value="0"></p>
                      <p>Carga Inicial Y:<input type="Number" id="cargaInicioY" value="0"></p>
                      <p>Carga Final Y: <input type="Number" id="cargaFimY" value="0"></p>
-                     <p><input type="button" value="inserir" onclick="insertLine()"></p> 
+                     <p><input type="button" value="inserir" id="btn-insert-line"></p> 
                 </section>
                 <section id="secEditPonto" class="hide">
                     <p>Editar ponto</p>
@@ -65,8 +65,8 @@
                         <option value="rotulado">rotulado</option>
                     </select></p>
                     <div display="flex">
-                        <input type="button" value="modificar" onclick="editNode()">
-                        <input type="button" value="remover" onclick="removeNode()">
+                        <input type="button" value="modificar" id="btn-edit-node">
+                        <input type="button" value="remover" id="btn-remove-node">
                     </div>
                 </section>
                 <section id="secEditLine" class="hide">
@@ -85,8 +85,8 @@
                     <p>Carga Inicial Y:<input type="Number" id="cargaInicioEdtionY" value="0"></p>
                     <p>Carga Final Y: <input type="Number" id="cargaFimEdtionY" value="0"></p>
                     <div display="flex">
-                        <input type="button" value="Modificar" onclick="edtiLine()">
-                        <input type="button" value="Remover" onclick="removeLine()">
+                        <input type="button" value="Modificar" id="btn-edit-line">
+                        <input type="button" value="Remover" id="btn-remove-line">
                     </div>
                 </section>
                 <section id="secMaterialForma" class="hide">
@@ -104,11 +104,11 @@
                         <p id='inercia'>momento de inércia = </p>
                     </div>
                     <div>
-                        <input type="button" value="adicionar" onclick="addMaterialForma()">
+                        <input type="button" value="adicionar" id="btn-insert-material-forma">
                     </div>
                 </section>
             </div>
         </div>
     </body>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
 </html>

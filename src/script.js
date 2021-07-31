@@ -1,5 +1,4 @@
-let screen = document.getElementById('screen') //pegando o canvas do html
-let ctx = screen.getContext("2d") //pegando o contexto do canvas
+import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 
 //seleções que guarda os nós criados
 let node1ForLine = document.getElementById('node1ForLine')
@@ -13,193 +12,6 @@ let lineForEdtion = document.getElementById('lineForEdtion')
 let lines = []
 let nodes = []
 let cargas = []
-
-
-//função que desenha a linha
-function drawLine(line) {
-    //consfigurando a os parametros de renderização
-    ctx.lineWidth = 3
-    ctx.strokeStyle = "green"
-    ctx.fillStyle = 'rgba(0,0,200, 0.5)'
-   
-    //deseha a carga vertical (Y)
-    ctx.beginPath()
-    ctx.moveTo(line.node1.x, line.node1.y)
-    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicioY)
-    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFimY)
-    ctx.lineTo(line.node2.x, line.node2.y)
-    ctx.fill()
-
-    ctx.fillStyle = 'black'
-    ctx.font = '15px arial'
-    ctx.fillText(`${line.carga.cargaInicioY}`, line.node1.x, line.node1.y-line.carga.cargaInicioY-3)
-    ctx.fillText(`${line.carga.cargaFimY}`, line.node2.x, line.node2.y-line.carga.cargaFimY-3)
-
-    //deseha a carga horizontal (X)
-    ctx.fillStyle = 'rgba(255,255,0, 0.5)'
-    ctx.beginPath()
-    ctx.moveTo(line.node1.x, line.node1.y)
-    ctx.lineTo(line.node1.x, line.node1.y-line.carga.cargaInicioX)
-    ctx.lineTo(line.node2.x, line.node2.y-line.carga.cargaFimX)
-    ctx.lineTo(line.node2.x, line.node2.y)
-    ctx.fill()
-
-    ctx.fillStyle = 'black'
-    ctx.font = '15px arial'
-    ctx.fillText(`${line.carga.cargaInicioX}`, line.node1.x, line.node1.y-line.carga.cargaInicioX-3)
-    ctx.fillText(`${line.carga.cargaFimX}`, line.node2.x, line.node2.y-line.carga.cargaFimX-3)
-
-    //desenha a linha
-    ctx.beginPath()
-    ctx.moveTo(line.node1.x, line.node1.y)
-    ctx.lineTo(line.node2.x, line.node2.y)
-    ctx.stroke()
-}
-
-//função que desenha o nó
-function drawNode(node){
-    ctx.fillStyle = 'red'
-    
-    ctx.beginPath()
-    ctx.arc(node.x, node.y, 3, 0, Math.PI*2, true)
-    ctx.fill()
-
-    //desenhado a força
-    if(node.forceX > 0){
-        ctx.strokeStyle = 'black'
-        ctx.fillStyle = 'black'
-        ctx.lineWidth = 1
-      
-        ctx.beginPath()
-        ctx.moveTo(node.x-node.forceX, node.y)
-        ctx.lineTo(node.x, node.y)
-        ctx.stroke()
-        
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y)
-        ctx.lineTo(node.x-10, node.y-5)
-        ctx.lineTo(node.x-10, node.y+5)
-        ctx.fill()
-        
-        ctx.font = "15px arial"
-        ctx.fillText(node.forceX, node.x - node.forceX, node.y)
-    } else if (node.forceX<0){
-        ctx.strokeStyle = 'black'
-        ctx.fillStyle = 'black'
-        ctx.lineWidth = 1
-      
-        ctx.beginPath()
-        ctx.moveTo(node.x-node.forceX, node.y)
-        ctx.lineTo(node.x, node.y)
-        ctx.stroke()
-        
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y)
-        ctx.lineTo(node.x+10, node.y-5)
-        ctx.lineTo(node.x+10, node.y+5)
-        ctx.fill()
-        
-        ctx.font = "15px arial"
-        ctx.fillText(node.forceX, node.x - node.forceX, node.y)
-    }
-
-    if(node.forceY > 0){
-        ctx.strokeStyle = 'black'
-        ctx.fillStyle = 'black'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y - node.forceY)
-        ctx.lineTo(node.x, node.y)
-        ctx.lineTo(node.x-5,node.y-10)
-        ctx.lineTo(node.x+5, node.y-10)
-        ctx.lineTo(node.x, node.y)
-        ctx.stroke()
-        ctx.fill()
-        ctx.font = "15px arial"
-        ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
-    } else if (node.forceY < 0) {
-        ctx.strokeStyle = 'black'
-        ctx.fillStyle = 'black'
-        ctx.lineWidth = 1
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y - node.forceY)
-        ctx.lineTo(node.x, node.y)
-        ctx.lineTo(node.x-5,node.y+10)
-        ctx.lineTo(node.x+5, node.y+10)
-        ctx.lineTo(node.x, node.y)
-        ctx.stroke()
-        ctx.fill()
-        ctx.font = "15px arial"
-        ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
-    }
-
-    if(node.vinc == "apoiado-x"){
-        ctx.lineWidth = 1
-        ctx.strokeStyle = "black"
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y)
-        ctx.lineTo(node.x - 10, node.y+10)
-        ctx.lineTo(node.x - 10, node.y-10)
-        ctx.lineTo(node.x, node.y)
-        ctx.moveTo(node.x-15, node.y-10)
-        ctx.lineTo(node.x-15, node.y+10)
-        ctx.stroke()
-    }else if(node.vinc == "apoiado-y"){
-        ctx.lineWidth = 1
-        ctx.strokeStyle = "black"
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y)
-        ctx.lineTo(node.x - 10, node.y+10)
-        ctx.lineTo(node.x + 10, node.y+10)
-        ctx.lineTo(node.x, node.y)
-        ctx.moveTo(node.x-10, node.y+15)
-        ctx.lineTo(node.x+10, node.y+15)
-        ctx.stroke()
-    }else if(node.vinc == "biapoiado"){
-        ctx.lineWidth = 1
-        ctx.strokeStyle = "black"
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y)
-        ctx.lineTo(node.x - 10, node.y+10)
-        ctx.lineTo(node.x + 10, node.y+10)
-        ctx.lineTo(node.x, node.y)
-        ctx.stroke() 
-        
-        for(let i=0; i<=20; i = i+4){
-            ctx.beginPath()
-            ctx.moveTo(node.x-10+i, node.y+10)
-            ctx.lineTo(node.x-13+i, node.y+15)
-            ctx.stroke()
-        }
-    }else if(node.vinc == "engastado"){
-        ctx.strokeStyle = 'black'
-        ctx.lineWidth = 1
-
-        ctx.beginPath()
-        ctx.moveTo(node.x, node.y+10)
-        ctx.lineTo(node.x, node.y-10)
-        ctx.stroke()
-
-        for(let i=0; i<=20; i = i+4){
-            ctx.beginPath()
-            ctx.moveTo(node.x, node.y-10+i)
-            ctx.lineTo(node.x-5, node.y-7+i)
-            ctx.stroke()
-        }
-    }else if(node.vinc == "rotulado"){
-        ctx.lineWidth = 1
-        ctx.strokeStyle = 'black'
-
-        ctx.beginPath()
-        ctx.arc(node.x, node.y, 5, 0, Math.PI*2, true)
-        ctx.stroke()
-    }
-}
 
 //calsse dos nos
 function Node(x=0, y=0, forceX=0, forceY=0, vinc, reaction={rx:0, ry:0, m:0}) {
@@ -226,9 +38,9 @@ const prop = {
 }
 
 //Funçã que recebe as caracteristicas do material
-function addMaterialForma() {
-    b = document.getElementById('base')
-    h = document.getElementById('altura')
+function insertMaterialForma() {
+    let b = document.getElementById('base')
+    let h = document.getElementById('altura')
 
     if(b.value && h.value){
         prop.material.tipo = document.getElementById('tipoMaterial').value
@@ -258,6 +70,8 @@ function addMaterialForma() {
         window.alert('insira a base e a altura das barras')
     }
 }
+
+document.getElementById('btn-insert-material-forma').addEventListener('click', insertMaterialForma)
 
 //função que insere um nó
 function insertNode() {
@@ -291,6 +105,8 @@ function insertNode() {
    }
 }
 
+document.getElementById('btn-insert-node').addEventListener('click', insertNode)
+
 function insertLine(){
    let node1 = document.getElementById("node1ForLine")
    let node2 = document.getElementById("node2ForLine")
@@ -303,7 +119,7 @@ function insertLine(){
        let cargaInicioY = document.getElementById('cargaInicioY')
        let cargaFimY = document.getElementById('cargaFimY')
 
-       carga = {
+       let carga = {
             cargaInicioX: Number(cargaInicioX.value),
             cargaFimX: Number(cargaFimX.value),
             cargaInicioY: Number(cargaInicioY.value),
@@ -327,6 +143,8 @@ function insertLine(){
        drawLine(line)
    }
 }
+
+document.getElementById('btn-insert-line').addEventListener('click', insertLine)
 
 //coloca valores nos elementos da edição de um ponto
 let edtionPosX = document.getElementById("edtionPosX")
@@ -409,8 +227,10 @@ function editNode(){
     })
 }
 
+document.getElementById('btn-edit-node').addEventListener('click', editNode)
+
 //função que edita uma linha
-function edtiLine(){
+function editLine(){
     if (lineForEdtion.value == "Selecione uma linha"){
         window.alert("Selecione uma linha")
         return
@@ -453,6 +273,8 @@ function edtiLine(){
     })
 }
 
+document.getElementById('btn-edit-line').addEventListener('click', editLine)
+
 function removeNode() {
     let indexRemove = Number(nodeForEdtion.value)
     if(nodeForEdtion.value == "Selecione um ponto"){
@@ -473,7 +295,7 @@ function removeNode() {
         }
         
         //continuar daqui modificar valores da seleção dos nós restantes
-        for(i=indexRemove + 1; i<nodes.length; i++){
+        for(let i=indexRemove + 1; i<nodes.length; i++){
             let node = document.getElementsByClassName(`no${i + 1}`)
 
             //Como muda a classe do ponto, a lista "node" vai perdendo os elementos e quando o comprimento da lista for 0 o loop acaba
@@ -508,6 +330,8 @@ function removeNode() {
     }
 }
 
+document.getElementById('btn-remove-node').addEventListener('click', removeNode)
+
 function removeLine() {
     let indexRemove = Number(lineForEdtion.value)
     if(lineForEdtion.value == "Selecione uma linha"){
@@ -529,7 +353,7 @@ function removeLine() {
         )
 
         //apagando linha
-        item = document.getElementById(`optionLine${indexRemove + 1}`)
+        let item = document.getElementById(`optionLine${indexRemove + 1}`)
 
         item.parentNode.removeChild(item)
 
@@ -569,45 +393,50 @@ function removeLine() {
     }
 }
 
-//let secAddPonto = document.getElementById("secAddPonto")
-//let secAddLinha = document.getElementById("secAddLinha")
-//let secEditPonto = document.getElementById("secEditPonto")
-//let secEditLine = document.getElementById("secEditLine")
-function menuAddPonto(){
+document.getElementById('btn-remove-line').addEventListener('click', removeLine)
+
+let secAddPonto = document.getElementById("secAddPonto")
+let secAddLinha = document.getElementById("secAddLinha")
+let secEditPonto = document.getElementById("secEditPonto")
+let secEditLine = document.getElementById("secEditLine")
+let secMaterialForma = document.getElementById("secMaterialForma")
+
+document.getElementById("menuAddPonto").addEventListener('click',() => {
     secAddPonto.className = "show"
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
     secMaterialForma.className = "hide"
-}
-function menuAddLinha(){
+    
+})
+document.getElementById("menuAddLinha").addEventListener('click',() => {
     secAddPonto.className = "hide"
     secAddLinha.className = "show"
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
     secMaterialForma.className = "hide"
-}
-function menuEditPonto(){
+})
+document.getElementById("menuEditPonto").addEventListener('click',() => {
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "show"
     secEditLine.className = "hide"
     secMaterialForma.className = "hide"
-}
-function menuEditLine(){
+})
+document.getElementById("menuEditLine").addEventListener('click',() => {
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
     secEditLine.className = "show"
     secMaterialForma.className = "hide"
-}
-function menuMaterialForma(){
+})
+document.getElementById("menuMaterialForma").addEventListener('click',() => {
     secAddPonto.className = "hide"
     secAddLinha.className = "hide"
     secEditPonto.className = "hide"
     secEditLine.className = "hide"
     secMaterialForma.className = "show"
-}
+})
 
 //função que indentifica o grau de liberdade de um nó
 function qntGrauLiberdade(node){
@@ -651,7 +480,7 @@ console.log(totalDeslocabilidades(nodes))
 
 //Parte para ajudar nos testes
 //Criando alguns pontos
-for(i=1 ; i<=4; i++){
+for(let i=1 ; i<=4; i++){
     let x = document.getElementById("posX")
     let y = document.getElementById("posY")
     let forceX = document.getElementById("forceX")
@@ -662,12 +491,12 @@ for(i=1 ; i<=4; i++){
     forceX.value = 0
     forceY.value  = 10*i+10
     vinc.value = "engastado"
-    
+
     insertNode()
 }
 
 //Criando algumas linha
-for(i=1; i<=4; i++){
+for(let i=1; i<=4; i++){
     if(i%2 != 0){
         let node1 = document.getElementById("node1ForLine")
         let node2 = document.getElementById("node2ForLine")
