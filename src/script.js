@@ -1,3 +1,5 @@
+//falta testar a função qntDeslocaTotal para quando tem nós que não estão sendo usados 
+
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 
 //seleções que guarda os nós criados
@@ -11,7 +13,7 @@ let lineForEdtion = document.getElementById('lineForEdtion')
 //criando os vetores onde serão armasenadas as linhas, os nos e as cargas
 let lines = []
 let nodes = []
-let cargas = []
+//let cargas = []
 
 //calsse dos nos
 function Node(x=0, y=0, forceX=0, forceY=0, vinc, reaction={rx:0, ry:0, m:0}) {
@@ -443,21 +445,25 @@ function qntGrauLiberdade(node){
     let vinc = node.vinc
     let lines = node.lines
     
+    //a função retorna um obejeto com duas propriedades: inLine diz se o ponto está sendo usado por uma linha,
+    //value diz o grau de liberdade daquele nó
     if(lines.length > 0){
         switch (vinc) {
             case "Nenhuma":
-                return 3
+                return {inLine: true ,value: 3}
             case "apoiado-x":
-                return 2
+                return {inLine: true ,value: 2}
             case "apoiado-y":
-                return 2
+                return {inLine: true ,value: 2}
             case "biapoiado":
-                return 1
+                return {inLine: true ,value: 1}
             case "rotulado":
-                return 3
+                return {inLine: true ,value: 3}
             case "engastado":
-                return 0
+                return {inLine: true ,value: 0}
         }
+    }else{
+        return {inLine: false, value: 0}
     }
 }
 
@@ -470,13 +476,14 @@ function totalDeslocabilidades(nodes){
     let qntDesloca = 0
 
     nodes.forEach((node)=>{
-        qntDesloca += Number(qntGrauLiberdade(node))
+        let grauLiberdade = qntGrauLiberdade(node) 
+        if(grauLiberdade.inLine){
+            qntDesloca += grauLiberdade.value
+        }
     })
 
     return qntDesloca
 }
-
-console.log(totalDeslocabilidades(nodes))
 
 //Parte para ajudar nos testes
 //Criando alguns pontos
