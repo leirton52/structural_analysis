@@ -1,9 +1,8 @@
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
+import * as menu from "./modules/menus.js"
 
 //seleções que guarda os nós criados
-let node1ForLine = document.getElementById('node1ForLine')
-let node2ForLine = document.getElementById('node2ForLine')
 let nodeForEdtion = document.getElementById('nodeForEdtion')
 let node1ForLineEdtion = document.getElementById('node1ForLineEdtion')
 let node2ForLineEdtion = document.getElementById('node2ForLineEdtion')
@@ -384,42 +383,12 @@ let secEditPonto = document.getElementById("secEditPonto")
 let secEditLine = document.getElementById("secEditLine")
 let secMaterialForma = document.getElementById("secMaterialForma")
 
-document.getElementById("menuAddPonto").addEventListener('click',() => {
-    secAddPonto.className = "show"
-    secAddLinha.className = "hide"
-    secEditPonto.className = "hide"
-    secEditLine.className = "hide"
-    secMaterialForma.className = "hide"
-    
-})
-document.getElementById("menuAddLinha").addEventListener('click',() => {
-    secAddPonto.className = "hide"
-    secAddLinha.className = "show"
-    secEditPonto.className = "hide"
-    secEditLine.className = "hide"
-    secMaterialForma.className = "hide"
-})
-document.getElementById("menuEditPonto").addEventListener('click',() => {
-    secAddPonto.className = "hide"
-    secAddLinha.className = "hide"
-    secEditPonto.className = "show"
-    secEditLine.className = "hide"
-    secMaterialForma.className = "hide"
-})
-document.getElementById("menuEditLine").addEventListener('click',() => {
-    secAddPonto.className = "hide"
-    secAddLinha.className = "hide"
-    secEditPonto.className = "hide"
-    secEditLine.className = "show"
-    secMaterialForma.className = "hide"
-})
-document.getElementById("menuMaterialForma").addEventListener('click',() => {
-    secAddPonto.className = "hide"
-    secAddLinha.className = "hide"
-    secEditPonto.className = "hide"
-    secEditLine.className = "hide"
-    secMaterialForma.className = "show"
-})
+//os ouvintes dos botões dos menus
+document.getElementById("menuAddPonto").addEventListener('click', menu.AddPonto)
+document.getElementById("menuAddLinha").addEventListener('click', menu.AddLinha)
+document.getElementById("menuEditPonto").addEventListener('click', menu.EditPonto)
+document.getElementById("menuEditLine").addEventListener('click', menu.EditLine)
+document.getElementById("menuMaterialForma").addEventListener('click', menu.MaterialForma)
 
 //função que indentifica o grau de liberdade de um nó
 function qntGrauLiberdade(node){
