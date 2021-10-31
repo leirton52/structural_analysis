@@ -9,6 +9,7 @@ class Node {
         this.reaction = reaction
         this.lines = [] //guarda a posição das linhas que estão usando o nó
     }
+
 }
 
 //classe das linhas
@@ -17,6 +18,19 @@ class Line {
         this.node1 = node1
         this.node2 = node2
         this.carga = carga
+    }
+    
+    get length(){
+        return this.calcLength()
+    }
+    
+    calcLength() {
+        let x1 = this.node1.x
+        let y1 = this.node1.y
+        let x2 = this.node2.x
+        let y2 = this.node2.y
+
+        return Math.hypot((x2-x1),(y2-y1))
     }
 }
 
