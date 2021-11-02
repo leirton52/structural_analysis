@@ -1,238 +1,198 @@
 //##################### Linha 1 #####################//
-const k11 = (line, prop) =>{
+const k11 = (L, prop) =>{
     let modElas = prop.material.modElas
     let area = prop.geometrica.area
-    let L = line.length
-
     let k11 = modElas*area/L
 
     return k11
 }
-const k12 = (line, prop) =>{
+const k12 = (L, prop) =>{
     return 0
 }
-const k13 = (line, prop) =>{
+const k13 = (L, prop) =>{
     return 0
 }
-const k14 = (line, prop) =>{
+const k14 = (L, prop) =>{
     let modElas = prop.material.modElas
     let area = prop.geometrica.area
-    let L = line.length
-
     let k14 = - modElas*area/L
 
     return k14
 }
-const k15 = (line, prop) =>{
+const k15 = (L, prop) =>{
     return 0
 }
-const k16 = (line, prop) =>{
+const k16 = (L, prop) =>{
     return 0
 }
 
 //##################### Linha 2 #####################//
-const k21 = (line, prop) =>{
+const k21 = (L, prop) =>{
     return 0
 }
-const k22 = (line, prop) =>{
+const k22 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k22 = 12*modElas*inercia/(L**3)
 
     return k22
 }
-const k23 = (line, prop) =>{
+const k23 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k23 = 6*modElas*inercia/(L**2)
 
     return k23
 }
-const k24 = (line, prop) =>{
+const k24 = (L, prop) =>{
     return 0
 }
-const k25 = (line, prop) =>{
+const k25 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k25 = -12*modElas*inercia/(L**3)
 
     return k25
 }
-const k26 = (line, prop) =>{
+const k26 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k26 = 6*modElas*inercia/(L**2)
 
     return k26
 }
 
 //##################### Linha 3 #####################//
-const k31 = (line, prop) =>{
+const k31 = (L, prop) =>{
     return 0
 }
-const k32 = (line, prop) =>{
+const k32 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k32 = 6*modElas*inercia/(L**2)
 
     return k32
 }
-const k33 = (line, prop) =>{
+const k33 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k33 = 4*modElas*inercia/L
 
     return k33
 }
-const k34 = (line, prop) =>{
+const k34 = (L, prop) =>{
     return 0
 }
-const k35 = (line, prop) =>{
+const k35 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k35 = - 6*modElas*inercia/(L**2)
 
     return k35
 }
-const k36 = (line, prop) =>{
+const k36 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k36 = 2*modElas*inercia/L
 
     return k36
 }
 
 //##################### Linha 4 #####################/
-const k41 = (line, prop) =>{
+const k41 = (L, prop) =>{
     let modElas = prop.material.modElas
     let area = prop.geometrica.area
-    let L = line.length
-
     let k41 = - modElas*area/L
 
     return k41
 }
-const k42 = (line, prop) =>{
+const k42 = (L, prop) =>{
     return 0
 }
-const k43 = (line, prop) =>{
+const k43 = (L, prop) =>{
     return 0
 }
-const k44 = (line, prop) =>{
+const k44 = (L, prop) =>{
     let modElas = prop.material.modElas
     let area = prop.geometrica.area
-    let L = line.length
-
     let k44 = modElas*area/L
 
     return k44
 }
-const k45 = (line, prop) =>{
+const k45 = (L, prop) =>{
     return 0
 }
-const k46 = (line, prop) =>{
+const k46 = (L, prop) =>{
     return 0
 }
 
 //##################### Linha 5 #####################//
-const k51 = (line, prop) =>{
+const k51 = (L, prop) =>{
     return 0
 }
-const k52 = (line, prop) =>{
+const k52 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k52 = -12*modElas*inercia/(L**3)
 
     return k52
 }
-const k53 = (line, prop) =>{
+const k53 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k53 = -6*modElas*inercia/(L**2)
 
     return k53
 }
-const k54 = (line, prop) =>{
+const k54 = (L, prop) =>{
     return 0
 }
-const k55 = (line, prop) =>{
+const k55 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k55 = 12*modElas*inercia/(L**3)
 
     return k55
 }
-const k56 = (line, prop) =>{
+const k56 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k56 = -6*modElas*inercia/(L**2)
 
     return k56
 }
 
 //##################### Linha 6 #####################//
-const k61 = (line, prop) =>{
+const k61 = (L, prop) =>{
     return 0
 }
-const k62 = (line, prop) =>{
+const k62 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k62 = 6*modElas*inercia/(L**2)
 
     return k62
 }
-const k63 = (line, prop) =>{
+const k63 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k63 = 2*modElas*inercia/L
 
     return k63
 }
-const k64 = (line, prop) =>{
+const k64 = (L, prop) =>{
     return 0
 }
-const k65 = (line, prop) =>{
+const k65 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k65 = - 6*modElas*inercia/(L**2)
 
     return k65
 }
-const k66 = (line, prop) =>{
+const k66 = (L, prop) =>{
     let modElas = prop.material.modElas
     let inercia = prop.geometrica.inercia
-    let L = line.length
-
     let k66 = 4*modElas*inercia/L
 
     return k66

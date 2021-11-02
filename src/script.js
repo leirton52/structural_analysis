@@ -17,8 +17,16 @@ let nodes = []
 
 // Objeto que guarda as caracteristicas das linhas
 const prop = {
-    material:{},
-    geometrica:{}
+    material:{
+        tipo:"concreto",
+        modElas: 2400
+    },
+    geometrica:{
+        base: 30,
+        altura: 10,
+        araea: 300,
+        inercia: 2500
+    }
 }
 
 //Funçã que recebe as caracteristicas do material
@@ -53,13 +61,6 @@ function insertMaterialForma() {
     }else{
         window.alert('insira a base e a altura das barras')
     }
-
-    console.log(`k11 = ${coefRigidez.k61(lines[0], prop)}`)
-    console.log(`k12 = ${coefRigidez.k62(lines[0], prop)}`)
-    console.log(`k13 = ${coefRigidez.k63(lines[0], prop)}`)
-    console.log(`k14 = ${coefRigidez.k64(lines[0], prop)}`)
-    console.log(`k15 = ${coefRigidez.k65(lines[0], prop)}`)
-    console.log(`k16 = ${coefRigidez.k66(lines[0], prop)}`)
 }
 
 document.getElementById('btn-insert-material-forma').addEventListener('click', insertMaterialForma)
@@ -117,7 +118,7 @@ function insertLine(){
             cargaFimY: Number(cargaFimY.value)
        }
        
-       let line = new Line(nodes[node1.value], nodes[node2.value], carga)
+       let line = new Line(nodes[node1.value], nodes[node2.value], carga, prop)
 
        lines.push(line)
 
@@ -488,3 +489,6 @@ let al = document.getElementById('altura')
 ba.value = 30
 al.value = 10
 insertMaterialForma()
+
+console.log(lines[0].mntRigidezLocal())
+console.log(lines[1].mntRigidezLocal())
