@@ -1,6 +1,7 @@
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
+import * as engPerf from "./modules/coefEngastamento.js"
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -473,3 +474,17 @@ for(let i=1; i<=4; i++){
     }
 }
 
+/*
+console.log(`f1(linha 1) = ${engPerf.f1(lines[0])}`)
+console.log(`f1(linha 2) = ${engPerf.f1(lines[1])}`)
+console.log(`f4(linha 1) = ${engPerf.f4(lines[0])}`)
+console.log(`f4(linha 2) = ${engPerf.f4(lines[1])}`)
+console.log(`f2(linha 1) = ${engPerf.f2(lines[0])}`)
+console.log(`f2(linha 2) = ${engPerf.f2(lines[1])}`)
+console.log(`f(linha 1) = ${engPerf.f5(lines[0])}`)
+console.log(`f(linha 2) = ${engPerf.f5(lines[1])}`)
+console.log(`f3(linha 1) = ${engPerf.f3(lines[0])}`)
+console.log(`f3(linha 2) = ${engPerf.f3(lines[1])}`)
+*/
+console.log(`f3(linha 1) = ${engPerf.f6(lines[0])}`)
+console.log(`f3(linha 2) = ${engPerf.f6(lines[1])}`)
