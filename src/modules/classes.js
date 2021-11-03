@@ -1,4 +1,4 @@
-//importanto os modulos co m os coeficientes de rigidez e de engastamento perfeito
+//importanto os modulos com os coeficientes de rigidez e de engastamento perfeito
 import {f1, f2, f3, f4, f5, f6} from "./coefEngastamento.js"
 import {k11,k12,k13,k14,k15,k16,
     k21,k22,k23,k24,k25,k26,
@@ -7,6 +7,8 @@ import {k11,k12,k13,k14,k15,k16,
     k51,k52,k53,k54,k55,k56,
     k61,k62,k63,k64,k65,k66
 } from "./coefRigidez.js"
+//Importando as matrizes de tranfrmação de eixos:
+import * as matrixTransforma from "./matrixTranforma.js"
 
 
 //calsse dos nos
@@ -45,33 +47,44 @@ class Line {
         return Math.hypot((x2-x1),(y2-y1))
     }
 
+    //Monta o vetor com os coeficientes de engastamento perfieto da barra
     mntEngastLocal(){
         let L = this.length
         let pi = this.carga.cargaInicioX
         let pf = this.carga.cargaFimX
         let qi = this.carga.cargaInicioY
         let qf = this.carga.cargaFimY
-
+        
         let engastLocal = [f1(L, pi, pf), f2(L, qi, qf), f3(L, qi, qf), f4(L, pi, pf), f5(L, qi, qf), f6(L, qi, qf)
         ]
-
+        
         return engastLocal
     }
-
+    
+    //Monta a matriz de rigidez local da barra
     mntRigidezLocal(){
         let L = this.length
         let prop = this.prop
 
         let rigidezLocal = [
-            [k11(L,prop),k12(L,prop),k13(L,prop),k14(L,prop),k15(L,prop),k16(L,prop),],
-            [k21(L,prop),k22(L,prop),k23(L,prop),k24(L,prop),k25(L,prop),k26(L,prop),],
-            [k31(L,prop),k32(L,prop),k33(L,prop),k34(L,prop),k35(L,prop),k36(L,prop),],
-            [k41(L,prop),k42(L,prop),k43(L,prop),k44(L,prop),k45(L,prop),k46(L,prop),],
-            [k51(L,prop),k52(L,prop),k53(L,prop),k54(L,prop),k55(L,prop),k56(L,prop),],
-            [k61(L,prop),k62(L,prop),k63(L,prop),k64(L,prop),k65(L,prop),k66(L,prop),]
+            [k11(L,prop),k12(L,prop),k13(L,prop),k14(L,prop),k15(L,prop),k16(L,prop)],
+            [k21(L,prop),k22(L,prop),k23(L,prop),k24(L,prop),k25(L,prop),k26(L,prop)],
+            [k31(L,prop),k32(L,prop),k33(L,prop),k34(L,prop),k35(L,prop),k36(L,prop)],
+            [k41(L,prop),k42(L,prop),k43(L,prop),k44(L,prop),k45(L,prop),k46(L,prop)],
+            [k51(L,prop),k52(L,prop),k53(L,prop),k54(L,prop),k55(L,prop),k56(L,prop)],
+            [k61(L,prop),k62(L,prop),k63(L,prop),k64(L,prop),k65(L,prop),k66(L,prop)]
         ]
 
         return rigidezLocal
+    }
+
+    //Matriz auxiliar para tanformar o vetor de engatamento e matriz de rigidez da barra para os eixos globais
+    mTransLocalToGlobal(){
+        return matrixTransforma.localToGlobal(this.length, this.node1, this.node2)
+    }
+    //Matriz auxiliar para tanformar o vetor de engatamento e matriz de rigidez da barra para os eixos locais
+    mTransGlobalToLocal(){
+        return matrixTransforma.globalToLocal(this.length, this.node1, this.node2)
     }
 }
 

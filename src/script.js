@@ -489,6 +489,3 @@ let al = document.getElementById('altura')
 ba.value = 30
 al.value = 10
 insertMaterialForma()
-
-console.log(lines[0].mntRigidezLocal())
-console.log(lines[1].mntRigidezLocal())
