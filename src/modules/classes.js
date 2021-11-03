@@ -22,7 +22,6 @@ class Node {
         this.reaction = reaction
         this.lines = [] //guarda a posição das linhas que estão usando o nó
     }
-
 }
 
 //classe das linhas
@@ -126,6 +125,16 @@ class Line {
         }
 
         return rigidezGlobal
+    }
+
+    //criando o vetor de espalhamento
+    mntVetorEspalhamento(nodes){
+        let pos1 = nodes.indexOf(this.node1) + 1
+        let pos2 = nodes.indexOf(this.node2) + 1
+
+        let vetorEspalhamento = [pos1*3-2, pos1*3-1, pos1*3, pos2*3-2, pos2*3-1, pos2*3]
+
+        return vetorEspalhamento
     }
 }
 
