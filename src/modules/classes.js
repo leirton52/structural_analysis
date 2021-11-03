@@ -86,6 +86,47 @@ class Line {
     mTransGlobalToLocal(){
         return matrixTransforma.globalToLocal(this.length, this.node1, this.node2)
     }
+
+    //Convetendo o vetor das cargas de engastamento perfeito para os eixos globais
+    mntEngastGlobal(){
+        let engastLocal = this.mntEngastLocal()
+        let matrixAuxiliar = this.mTransLocalToGlobal()
+
+        let engastGlobal = [0,0,0,0,0,0]
+
+        for(let i=0; i<6; i++){
+            for(let j=0; j<6; j++){
+                engastGlobal[i] += matrixAuxiliar[i][j]*engastLocal[j]
+            }
+        }
+
+        return engastGlobal
+    }
+
+    //Convetendo matriz de rigidez para os eixos globais
+    mntRigidezGlobal(){
+        let rigidezLocal = this.mntRigidezLocal()
+        let matrixAuxiliar = this.mTransLocalToGlobal()
+
+        let rigidezGlobal = [
+            [0,0,0,0,0,0],
+            [0,0,0,0,0,0],
+            [0,0,0,0,0,0],
+            [0,0,0,0,0,0],
+            [0,0,0,0,0,0],
+            [0,0,0,0,0,0],
+        ]
+
+        for(let i=0; i<6; i++){
+            for(let j=0; j<6; j++){
+                for(let k=0; k<6; k++){
+                    rigidezGlobal[i][j] += matrixAuxiliar[j][k]*rigidezLocal[i][k]
+                }
+            }
+        }
+
+        return rigidezGlobal
+    }
 }
 
 
