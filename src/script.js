@@ -1,8 +1,7 @@
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
-import * as engPerf from "./modules/coefEngastamento.js"
-import * as coefRigidez from "./modules/coefRigidez.js"
+import {mntMatrizRigidezGlobal} from "./modules/matrizRigidezGlobal.js"
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
