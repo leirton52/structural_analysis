@@ -13,13 +13,13 @@ import * as matrixTransforma from "./matrixTranforma.js"
 
 //calsse dos nos
 class Node {
-    constructor(x = 0, y = 0, forceX = 0, forceY = 0, vinc, reaction = { rx: 0, ry: 0, m: 0 }) {
+    constructor(x = 0, y = 0, forceX = 0, forceY = 0, momento,vinc) {
         this.x = x
         this.y = y
         this.forceX = forceX
         this.forceY = forceY
+        this.momento = momento
         this.vinc = vinc
-        this.reaction = reaction
         this.lines = [] //guarda a posição das linhas que estão usando o nó
     }
 }

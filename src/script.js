@@ -72,9 +72,10 @@ function insertNode() {
    if(x.value && y.value){
         let forceX = document.getElementById('forceX')
         let forceY = document.getElementById('forceY')
+        let momento = document.getElementById('momento')
         let vinc = document.getElementById("vinc")
-        
-        let node = new Node(Number(x.value), Number(y.value), Number(forceX.value), Number(forceY.value),vinc.value)
+
+        let node = new Node(Number(x.value), Number(y.value), Number(forceX.value), Number(forceY.value), Number(momento.value),vinc.value)
 
         nodes.push(node)
         drawNode(node)
@@ -142,6 +143,7 @@ let edtionPosX = document.getElementById("edtionPosX")
 let edtionPosY = document.getElementById("edtionPosY")
 let edtionForceX = document.getElementById("edtionForceX")
 let edtionForceY = document.getElementById("edtionForceY")
+let edtionMomento = document.getElementById("edtionMomento")
 let edtionVinc = document.getElementById("edtionVinc")
 nodeForEdtion.addEventListener('change', (event) => {
     if(nodeForEdtion.value == "Selecione um ponto"){
@@ -149,12 +151,14 @@ nodeForEdtion.addEventListener('change', (event) => {
         edtionPosY.value = null
         edtionForceX.value = null
         edtionForceY.value = null
+        edtionMomento.value = null
         edtionVinc.value = "Nenhuma"
     }else{
         edtionPosX.value = nodes[nodeForEdtion.value].x
         edtionPosY.value = nodes[nodeForEdtion.value].y
         edtionForceX.value = nodes[nodeForEdtion.value].forceX
         edtionForceY.value = nodes[nodeForEdtion.value].forceY
+        edtionMomento.value = nodes[nodeForEdtion.value].momento
         edtionVinc.value = nodes[nodeForEdtion.value].vinc
     }
 })
@@ -194,6 +198,7 @@ function editNode(){
     nodes[nodeForEdtion.value].y = Number(edtionPosY.value)
     nodes[nodeForEdtion.value].forceX = Number(edtionForceX.value)
     nodes[nodeForEdtion.value].forceY = Number(edtionForceY.value)
+    nodes[nodeForEdtion.value].momento = Number(edtionMomento.value)
     nodes[nodeForEdtion.value].vinc = edtionVinc.value
     
     //Modifica no que está sendo editado na TAG select
@@ -216,6 +221,8 @@ function editNode(){
     lines.forEach(line => {
        drawLine(line) 
     })
+
+    console.log(nodes[nodeForEdtion.value])
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
@@ -317,6 +324,7 @@ function removeNode() {
         edtionPosY.value = null
         edtionForceX.value = null
         edtionForceY.value = null
+        edtionMomento.value = null
         edtionVinc.value = "Nenhuma"
     }
 }
@@ -451,11 +459,13 @@ for(let i=1 ; i<=4; i++){
     let y = document.getElementById("posY")
     let forceX = document.getElementById("forceX")
     let forceY = document.getElementById("forceY")
+    let momento = document.getElementById("momento")
 
     x.value = i*100 - 50
     y.value = 100
     forceX.value = 0
     forceY.value  = 10*i+10
+    momento.value = 9*i
     vinc.value = "engastado"
 
     insertNode()
