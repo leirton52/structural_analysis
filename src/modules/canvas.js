@@ -121,6 +121,41 @@ function drawNode(node){
         ctx.fillText(node.forceY, node.x,node.y-node.forceY+10)
     }
 
+    //desenhando a carga de momento
+    if(node.momento >0){
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'black'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.arc(node.x - 10, node.y, 10, 3*Math.PI/2, Math.PI/2, true)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(node.x-0, node.y+10)
+        ctx.lineTo(node.x-10, node.y+5)
+        ctx.lineTo(node.x-10, node.y+15)
+        ctx.fill()
+        
+        ctx.font = "15px arial"
+        ctx.fillText(node.momento, node.x-30,node.y+20)
+    } else if (node.momento <0){
+        ctx.strokeStyle = 'black'
+        ctx.fillStyle = 'black'
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.arc(node.x + 10, node.y, 10, Math.PI/2, 3*Math.PI/2, true)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(node.x, node.y+10)
+        ctx.lineTo(node.x+10, node.y+5)
+        ctx.lineTo(node.x+10, node.y+15)
+        ctx.fill()
+        
+        ctx.font = "15px arial"
+        ctx.fillText(node.momento, node.x-30,node.y+20)
+    }
+
     if(node.vinc == "apoiado-x"){
         ctx.lineWidth = 1
         ctx.strokeStyle = "black"

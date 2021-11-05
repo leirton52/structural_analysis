@@ -222,8 +222,6 @@ function editNode(){
     lines.forEach(line => {
        drawLine(line) 
     })
-
-    console.log(nodes[nodeForEdtion.value])
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
