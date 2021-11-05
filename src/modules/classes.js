@@ -22,6 +22,10 @@ class Node {
         this.vinc = vinc
         this.lines = [] //guarda a posição das linhas que estão usando o nó
     }
+
+    cargaNodal(){
+        return [this.forceX, this.forceY, this.momento]
+    }
 }
 
 //classe das linhas
