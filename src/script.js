@@ -2,8 +2,8 @@ import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
 import {mntMatrizRigidezGlobal} from "./modules/matrizRigidezGlobal.js"
-import {mntcargasNodaisCombinadas} from "./modules/cargasNodaisCombinadas.js"
-import { mntVetorEspalhamentoNodes, mntVetorEspalhamentoLines } from "./modules/vetorEspalhamento.js";
+import {mntCargasNodaisCombinadas} from "./modules/cargasNodaisCombinadas.js"
+import { resolveSistema } from "./modules/eliminaGauss.js";
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -224,8 +224,12 @@ function editNode(){
        drawLine(line) 
     })
 
-    let maRigiGlo = mntcargasNodaisCombinadas(nodes, lines)
-    console.log(maRigiGlo) 
+    let maRig = mntMatrizRigidezGlobal(nodes, lines).matrizRigidezGlobalLivre
+    let caCom = mntCargasNodaisCombinadas(nodes, lines).cargasNodaisCombinadasLivres
+
+    let deslocaLivres = resolveSistema(maRig, caCom)
+    console.log(maRig)
+    console.log(deslocaLivres)
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)

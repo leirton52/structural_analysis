@@ -1,7 +1,7 @@
 import { resumoDesloca } from "./resumoDesloca.js";
 import { mntVetorEspalhamentoLines } from "./vetorEspalhamento.js";
 
-const mntcargasNodaisCombinadas = (nodes, lines) => {
+const mntCargasNodaisCombinadas = (nodes, lines) => {
     mntVetorEspalhamentoLines(lines, nodes)
     let desloca = resumoDesloca(nodes)
 
@@ -42,8 +42,8 @@ const mntcargasNodaisCombinadas = (nodes, lines) => {
     let cargasNodaisCombinadasFixas = []
     for(let i=desloca.livres; i< desloca.total; i++){
         cargasNodaisCombinadasFixas.push(cargasNodaisCombinadas[i])
-    }
+       }
     return {cargasNodaisCombinadasLivres: cargasNodaisCombinadasLivres,cargasNodaisCombinadasFixas:cargasNodaisCombinadasFixas}
 }
 
-export {mntcargasNodaisCombinadas}
+export {mntCargasNodaisCombinadas}
