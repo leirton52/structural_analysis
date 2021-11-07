@@ -3,6 +3,9 @@ import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
 import {mntMatrizRigidezGlobal} from "./modules/matrizRigidezGlobal.js"
 import {mntCargasNodaisEqui} from "./modules/cargasNodaisEqui.js"
+import { mntVetorEspalhamentoNodes, mntVetorEspalhamentoLines } from "./modules/vetorEspalhamento.js";
+
+
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -222,6 +225,10 @@ function editNode(){
     lines.forEach(line => {
        drawLine(line) 
     })
+
+    mntVetorEspalhamentoLines(lines, nodes)
+    console.log(lines[0].coordGlobal)
+    console.log(lines[1].coordGlobal)
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
@@ -497,3 +504,4 @@ let al = document.getElementById('altura')
 ba.value = 30
 al.value = 10
 insertMaterialForma()
+

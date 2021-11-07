@@ -212,14 +212,14 @@ function drawNode(node){
             ctx.lineTo(node.x-5, node.y-7+i)
             ctx.stroke()
         }
-    }else if(node.vinc == "rotulado"){
+    }/* else if(node.vinc == "rotulado"){
         ctx.lineWidth = 1
         ctx.strokeStyle = 'black'
 
         ctx.beginPath()
         ctx.arc(node.x, node.y, 5, 0, Math.PI*2, true)
         ctx.stroke()
-    }
+    } */
 }
 
 export {screen, ctx, drawLine, drawNode}

@@ -21,10 +21,32 @@ class Node {
         this.momento = momento
         this.vinc = vinc
         this.lines = [] //guarda a posição das linhas que estão usando o nó
+        this.coordGlobal = []
     }
 
     cargaNodal(){
         return [this.forceX, this.forceY, this.momento]
+    }
+
+    //cria um vetor com valor booleanos para vincular as cargas dos nos ao tipo de restição 
+    //flase -> no com movimento live naquela direção
+    //true -> nó com moviemtno restrito naquela direção
+    isNodeRestrito(){
+        if(this.vinc == "apoiado-x"){
+            return [true, false, false]
+        }else if(this.vinc == "apoiado-y"){
+            return [false, true,false]
+        }else if(this.vinc == "engastado"){
+            return [true,true, true]
+        }else if(this.vinc == "biapoiado"){
+            return [true,true, false]
+        }else if(this.vinc == "Nenhuma"){
+            return [false, false, false]
+        }
+    }
+
+    setCoordGlobal (vetEpalhamento) {
+        this.coordGlobal = vetEpalhamento
     }
 }
 
@@ -35,8 +57,13 @@ class Line {
         this.node2 = node2
         this.carga = carga
         this.prop = prop
+        this.coordGlobal = []
     }
     
+    setCoordGlobal(vetEpalhamento) {
+        this.coordGlobal = vetEpalhamento
+    }
+
     get length(){
         return this.calcLength()
     }
