@@ -1,11 +1,11 @@
-const mntCargasNodaisEqui = (nodes, lines) => {
+const mntcargasNodaisCombinadas = (nodes, lines) => {
     //criando o vertor das cargas nodais base (com as cargas que estão atuando diretamente nos nos)
-    let cargasNodaisEqui = []
+    let cargasNodaisCombinadas = []
     nodes.forEach( node => {
         let cargaNodal = node.cargaNodal()
 
         cargaNodal.forEach(carga => {
-            cargasNodaisEqui.push(carga)    
+            cargasNodaisCombinadas.push(carga)    
         });
     });
 
@@ -18,11 +18,11 @@ const mntCargasNodaisEqui = (nodes, lines) => {
             // começam do 1
             let iNodalEqui = vetorEspalhamento[i] - 1
             
-            cargasNodaisEqui[iNodalEqui] -= engastGlobal[i]
+            cargasNodaisCombinadas[iNodalEqui] -= engastGlobal[i]
         }
     });
 
-    return cargasNodaisEqui
+    return cargasNodaisCombinadas
 }
 
-export {mntCargasNodaisEqui}
+export {mntcargasNodaisCombinadas}

@@ -5,8 +5,6 @@ import {mntMatrizRigidezGlobal} from "./modules/matrizRigidezGlobal.js"
 import {mntCargasNodaisEqui} from "./modules/cargasNodaisEqui.js"
 import { mntVetorEspalhamentoNodes, mntVetorEspalhamentoLines } from "./modules/vetorEspalhamento.js";
 
-
-
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
 let node1ForLineEdtion = document.getElementById('node1ForLineEdtion')
@@ -226,9 +224,8 @@ function editNode(){
        drawLine(line) 
     })
 
-    mntVetorEspalhamentoLines(lines, nodes)
-    console.log(lines[0].coordGlobal)
-    console.log(lines[1].coordGlobal)
+    let maRigiGlo = mntMatrizRigidezGlobal(nodes, lines)
+    console.log(maRigiGlo) 
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
