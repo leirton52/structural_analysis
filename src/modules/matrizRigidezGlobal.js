@@ -63,8 +63,6 @@ const mntMatrizRigidezGlobal = (nodes, lines) => {
         ifixas++
     }
 
-    console.log(matrizRigidezGlobalFixa)
-
     return {matrizRigidezGlobalLivre: matrizRigidezGlobalLivre, matrizRigidezGlobalFixa:matrizRigidezGlobalFixa}
 }
 

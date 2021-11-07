@@ -2,7 +2,7 @@ import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
 import {mntMatrizRigidezGlobal} from "./modules/matrizRigidezGlobal.js"
-import {mntCargasNodaisEqui} from "./modules/cargasNodaisEqui.js"
+import {mntcargasNodaisCombinadas} from "./modules/cargasNodaisCombinadas.js"
 import { mntVetorEspalhamentoNodes, mntVetorEspalhamentoLines } from "./modules/vetorEspalhamento.js";
 
 //seleções que guarda os nós criados
@@ -224,7 +224,7 @@ function editNode(){
        drawLine(line) 
     })
 
-    let maRigiGlo = mntMatrizRigidezGlobal(nodes, lines)
+    let maRigiGlo = mntcargasNodaisCombinadas(nodes, lines)
     console.log(maRigiGlo) 
 }
 
