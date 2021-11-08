@@ -1,7 +1,7 @@
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
-import {reactions} from "./modules/resultados.js"
+import {cargasInternas} from "./modules/resultados.js"
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -222,7 +222,9 @@ function editNode(){
        drawLine(line) 
     })
 
-    console.log(reactions(nodes, lines))
+    cargasInternas(nodes, lines)
+    console.log(lines[0].cargasInternas)
+    console.log(lines[1].cargasInternas)
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
