@@ -1,7 +1,7 @@
 import {screen, ctx, drawLine, drawNode} from "./modules/canvas.js"
 import {Node, Line} from "./modules/classes.js"
 import * as menu from "./modules/menus.js"
-import {cargasInternas} from "./modules/resultados.js"
+import {showResults} from "./modules/showResults.js"
 
 //seleções que guarda os nós criados
 let nodeForEdtion = document.getElementById('nodeForEdtion')
@@ -221,10 +221,6 @@ function editNode(){
     lines.forEach(line => {
        drawLine(line) 
     })
-
-    cargasInternas(nodes, lines)
-    console.log(lines[0].cargasInternas)
-    console.log(lines[1].cargasInternas)
 }
 
 document.getElementById('btn-edit-node').addEventListener('click', editNode)
@@ -402,12 +398,17 @@ let secEditPonto = document.getElementById("secEditPonto")
 let secEditLine = document.getElementById("secEditLine")
 let secMaterialForma = document.getElementById("secMaterialForma")
 
+const showRes = () => {
+    showResults(document.getElementById(`secShowResults`),nodes, lines)
+}
+
 //os ouvintes dos botões dos menus
 document.getElementById("menuAddPonto").addEventListener('click', menu.AddPonto)
 document.getElementById("menuAddLinha").addEventListener('click', menu.AddLinha)
 document.getElementById("menuEditPonto").addEventListener('click', menu.EditPonto)
 document.getElementById("menuEditLine").addEventListener('click', menu.EditLine)
 document.getElementById("menuMaterialForma").addEventListener('click', menu.MaterialForma)
+document.getElementById("btn-montrar-resultados").addEventListener('click', showRes)
 
 //função que indentifica o grau de liberdade de um nó
 function qntGrauLiberdade(node){

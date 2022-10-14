@@ -18,9 +18,6 @@ const reactions = (nodes, lines) => {
     let matrizDeslocaLives = deslocaLivres(nodes, lines)
     let cargasNodaisFixa = mntCargasNodaisCombinadas(nodes, lines).cargasNodaisCombinadasFixas
 
-    console.log(matrizesRigidezFixa)
-    console.log(matrizDeslocaLives)
-
     for(let i = 0; i<matrizesRigidezFixa.length; i++){
         let reac = 0
         for(let j = 0; j< matrizDeslocaLives.length; j++){
@@ -29,7 +26,26 @@ const reactions = (nodes, lines) => {
 
         reac -= cargasNodaisFixa[i]
         reactions.push(reac)
+
     }
+    
+    //colocar reações em cada nó - próxima coisa a fazer
+    nodes.forEach( node => {
+        let reac = []
+        let coordGlobal = node.coordGlobal
+        const isNodeRestrito = node.isNodeRestrito()
+
+        isNodeRestrito.forEach((cond, i) => {
+            if(cond){
+                reac.push(reactions[coordGlobal[i]-matrizDeslocaLives.length- 1])
+            }else{
+                reac.push("-")
+            }
+        });
+
+        node.setReactions(reac)
+        console.log(node.reactions)
+    });
 
     return reactions
 }
@@ -65,7 +81,9 @@ const cargasInternas = (nodes, lines) => {
         }
 
         line.setCargasInternas(cargasInternas)
-    }); 
+    });
+
+    return cargasInternasGlobal
 }
 
-export {reactions, cargasInternas}
+export {reactions, cargasInternas, deslocaLivres}

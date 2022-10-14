@@ -22,6 +22,7 @@ class Node {
         this.vinc = vinc
         this.lines = [] //guarda a posição das linhas que estão usando o nó
         this.coordGlobal = []
+        this.reactions = []
     }
 
     cargaNodal(){
@@ -47,6 +48,10 @@ class Node {
 
     setCoordGlobal (vetEpalhamento) {
         this.coordGlobal = vetEpalhamento
+    }
+
+    setReactions (reactions) {
+        this.reactions = reactions
     }
 }
 
